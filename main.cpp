@@ -196,53 +196,53 @@ Part 1b - Step 2: Assignment
         c) pick properties that can eventually be represented with 
         'int float double bool char std::string'.
 
-Thing 1)
+Thing 1) Camera
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) lens
+    2) film
+    3) zoom knob
+    4) shutter speed
+    5) capture button
 3 things it can do:
-    1)
-    2)
-    3)
+    1) take picture
+    2) take video
+    3) flash
 
-Thing 2)
+Thing 2) Coffee Maker
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) Amount of water
+    2) Amount of coffee bean X
+    3) Amount of coffee bean Y
+    4) Interface
+    5) Timer
 3 things it can do:
-    1)
-    2)
-    3)
+    1) Make coffee
+    2) Receive coffee request
+    3) Decline coffee request
 
-Thing 3)
+Thing 3) Fire alarm system
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) Smoke detector
+    2) Speaker
+    3) Phone Line
+    4) Camera
+    5) Memory
 3 things it can do:
-    1)
-    2)
-    3)
+    1) Detect fire
+    2) Sound alarm
+    3) Alert fire department
 
-Thing 4)
+Thing 4) Keyboard
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) Number of keys
+    2) Volume knob
+    3) Mode switch
+    4) LCD screen
+    5) Pedal
 3 things it can do:
-    1)
-    2)
-    3)
+    1) Play sound
+    2) change mode
+    3) display mode
 */
 
 /*
