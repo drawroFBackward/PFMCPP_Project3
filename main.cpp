@@ -83,51 +83,51 @@ Main Object: Car Interior
         Name 4 nouns you'll find on the [Sub Object]
             1) paddle shifters
             2) 'cruise control' controls
-            3) 
-            4) 
+            3) horn button
+            4) answer phone button
         Name 2 actions that the [Sub Object] can do:
             1) adjust cruise control settings.
-            2)
+            2) blow the horn
         
     Sub Object: Instrument Cluster
         Name 4 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
-            4)
+            1) speedometer
+            2) fuel gauge
+            3) odometer
+            4) temperature gauge
         Name 3 actions that the [Sub Object] can do:
-            1)
-            2)
-            3)
+            1) tell speed
+            2) tell fuel level
+            3) tell temperature
     
     Sub Object: Environment Controls
         Name 3 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
+            1) mode
+            2) temperature knob
+            3) fanspeed knob
         Name 3 actions that the [Sub Object] can do:
-            1)
-            2)
-            3)
+            1) change mode from fan to ac
+            2) change temperature
+            3) change fan speed
 
     Sub Object: Infotainment System
         Name 3 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
+            1) channel button
+            2) volume knob
+            3) on/off button
         Name 3 actions that the [Sub Object] can do:
-            1)
-            2)
-            3)
+            1) turn on/off
+            2) change channel
+            3) change volume
 
     Sub Object: Seat 
         Name 3 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
+            1) temperature sensor
+            2) seatbelt
+            3) recline control button
         Name 2 actions that the [Sub Object] can do:
-            1)
-            2)
+            1) recline
+            2) warm seat
 */
 
 /*
