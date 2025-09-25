@@ -198,11 +198,11 @@ Part 1b - Step 2: Assignment
 
 Thing 1) Camera
 5 properties:
-    1) lens
-    2) film
-    3) zoom knob
-    4) shutter speed
-    5) capture button
+    1) lens (std::string)
+    2) film (std::string)
+    3) zoom (float)
+    4) shutter speed (float)
+    5) capture button (bool)
 3 things it can do:
     1) take picture
     2) take video
@@ -210,11 +210,11 @@ Thing 1) Camera
 
 Thing 2) Coffee Maker
 5 properties:
-    1) Amount of water
-    2) Amount of coffee bean X
-    3) Amount of coffee bean Y
-    4) Interface
-    5) Timer
+    1) Amount of water (int)
+    2) Amount of coffee bean X (int)
+    3) Amount of coffee bean Y (int)
+    4) Interface (void)
+    5) Timer (int)
 3 things it can do:
     1) Make coffee
     2) Receive coffee request
@@ -222,11 +222,11 @@ Thing 2) Coffee Maker
 
 Thing 3) Fire alarm system
 5 properties:
-    1) Smoke detector
-    2) Speaker
-    3) Phone Line
-    4) Camera
-    5) Memory
+    1) Smoke detector (void)
+    2) Speaker (std::string)
+    3) Phone Line (void)
+    4) Camera (std::string)
+    5) Memory (double)
 3 things it can do:
     1) Detect fire
     2) Sound alarm
@@ -234,11 +234,11 @@ Thing 3) Fire alarm system
 
 Thing 4) Keyboard
 5 properties:
-    1) Number of keys
-    2) Volume knob
-    3) Mode switch
-    4) LCD screen
-    5) Pedal
+    1) Number of keys (int)
+    2) Volume (float)
+    3) Mode (std::string)
+    4) LCD screen (void)
+    5) Pedal (bool)
 3 things it can do:
     1) Play sound
     2) change mode
@@ -319,6 +319,8 @@ example:
         area in cm2 (int)
         brand (std::string)
 */
+
+// 1c Step 2 completed in Part 1b
 
 /*
 =================
