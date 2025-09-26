@@ -436,65 +436,65 @@ example:
     You will need to provide 5 properties and 3 member functions of that Engine object in plain English.
     Remember to pick properties that can be represented with 'int float double bool char std::string'.
 
-Thing 5)
+Thing 5) Arms
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) number of fingers (int)
+    2) flexibility (int)
+    3) strength (int)
+    4) reach (int)
+    5) condition (std::string)
 3 things it can do:
-    1)
-    2)
-    3)
+    1) grab object
+    2) move object
+    3) punch
 
-Thing 6)
+Thing 6) Legs
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) number of toes (int)
+    2) ankle flexibility (int)
+    3) strength (int)
+    4) knee joint range (int)
+    5) condition (std::string)
 3 things it can do:
-    1)
-    2)
-    3)
+    1) kick
+    2) juggle a ball
+    3) jump
 
-Thing 7)
+Thing 7) Skin
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) color (std::string)
+    2) thickness (int)
+    3) wrinkles (int)
+    4) age (int)
+    5) condition (std::string)
 3 things it can do:
-    1)
-    2)
-    3)
+    1) break (bleed)
+    2) burn
+    3) stretch
 
-Thing 8)
+Thing 8) Health
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) blood pressure (int)
+    2) weight (int)
+    3) height (int)
+    4) sleep time (int)
+    5) condition (std::string)
 3 things it can do:
-    1)
-    2)
-    3)
+    1) change condition (eg. fall ill)
+    2) gain weight
+    3) increase height
 
-Thing 9)
+Thing 9) Personality
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) IQ (int)
+    2) EQ (int)
+    3) personality type (std::string)
+    4) interactions per day (int)
+    5) special qualities (std::string)
 3 things it can do:
-    1)
-    2)
-    3)
+    1) make decisions
+    2) learn skills
+    3) affect health
  */
 
 /*
