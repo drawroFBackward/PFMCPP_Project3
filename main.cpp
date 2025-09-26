@@ -196,53 +196,6 @@ Part 1b - Step 2: Assignment
         c) pick properties that can eventually be represented with 
         'int float double bool char std::string'.
 
-Thing 1) Camera
-5 properties:
-    1) lens (std::string)
-    2) film (std::string)
-    3) zoom (float)
-    4) shutter speed (float)
-    5) capture button (bool)
-3 things it can do:
-    1) take picture
-    2) take video
-    3) flash
-
-Thing 2) Coffee Maker
-5 properties:
-    1) Amount of water (int)
-    2) Amount of coffee bean X (int)
-    3) Amount of coffee bean Y (int)
-    4) Interface (void)
-    5) Timer (int)
-3 things it can do:
-    1) Make coffee
-    2) Receive coffee request
-    3) Decline coffee request
-
-Thing 3) Fire alarm system
-5 properties:
-    1) Smoke detector (void)
-    2) Speaker (std::string)
-    3) Phone Line (void)
-    4) Camera (std::string)
-    5) Memory (double)
-3 things it can do:
-    1) Detect fire
-    2) Sound alarm
-    3) Alert fire department
-
-Thing 4) Keyboard
-5 properties:
-    1) Number of keys (int)
-    2) Volume (float)
-    3) Mode (std::string)
-    4) LCD screen (void)
-    5) Pedal (bool)
-3 things it can do:
-    1) Play sound
-    2) change mode
-    3) display mode
 */
 
 /*
@@ -339,17 +292,6 @@ Define an object that is made of 5 sub-objects.
     These 5 sub-objects will not be defined using Primitives, but instead will be their own UDTs 
     you'll define these 5 sub-objects in Part 1d.
 
-Thing 10) Human
-5 properties:
-    1) Arms
-    2) Legs
-    3) Skin
-    4) Health
-    5) Personality
-3 things it can do:
-    1) Excercise
-    2) Make friends
-    3) Get angry
  */
 
  /*
@@ -436,6 +378,108 @@ example:
     You will need to provide 5 properties and 3 member functions of that Engine object in plain English.
     Remember to pick properties that can be represented with 'int float double bool char std::string'.
 
+ */
+
+/*
+=================
+Part 1d - Step 3: Commit
+=================
+Now that you've made changes to the code, make a commit!
+Be sure to make the commit message meaningful.
+*/
+
+/*
+================
+Part 1d - Step 4: Assignment
+================
+    - write the name of the primitive type you'll be using after each property for UDTs 5 - 9.
+    - You already did this for UDTs 1-4 in Part 1c.
+    - Pick properties that can be represented with 'int float double bool char std::string'
+    
+example: 
+    Display:
+        Number of Pixels (int)
+        Amount of Power consumed (milliwatt-hours) (float)
+        Brightness (double)
+        width in cm (int)
+        height in cm (int)
+*/
+
+/*
+=================
+Part 1d - Step 5: Commit
+=================
+Now that you've made changes to the code, make a commit!
+Be sure to make the commit message meaningful.
+*/
+
+/*
+===================
+Part 1d - Step 6: assignment
+===================
+You've just defined 10 UDTs!
+4 of them are unrelated (UDTs 1-4).
+5 of them form the sub-objects that make up the 10th UDT. 
+
+MOVE THEM to the space below this block comment and put them in numerical order 
+(1 - 10).
+    DO NOT COPY. 
+    CUT AND PASTE. 
+    I do not want to see 2 copies of your Plain-English UDTs.  
+    I only want to see the 10 UDTs written BELOW this block comment, in numerical order (1 - 10).
+    simply CUT and PASTE them in the space provided below:
+*/
+
+/*
+
+Thing 1) Camera
+5 properties:
+    1) lens (std::string)
+    2) film (std::string)
+    3) zoom (float)
+    4) shutter speed (float)
+    5) capture button (bool)
+3 things it can do:
+    1) take picture
+    2) take video
+    3) flash
+
+Thing 2) Coffee Maker
+5 properties:
+    1) Amount of water (int)
+    2) Amount of coffee bean X (int)
+    3) Amount of coffee bean Y (int)
+    4) Interface (void)
+    5) Timer (int)
+3 things it can do:
+    1) Make coffee
+    2) Receive coffee request
+    3) Decline coffee request
+
+Thing 3) Fire alarm system
+5 properties:
+    1) Smoke detector (void)
+    2) Speaker (std::string)
+    3) Phone Line (void)
+    4) Camera (std::string)
+    5) Memory (double)
+3 things it can do:
+    1) Detect fire
+    2) Sound alarm
+    3) Alert fire department
+
+Thing 4) Keyboard
+5 properties:
+    1) Number of keys (int)
+    2) Volume (float)
+    3) Mode (std::string)
+    4) LCD screen (void)
+    5) Pedal (bool)
+3 things it can do:
+    1) Play sound
+    2) change mode
+    3) display mode
+
 Thing 5) Arms
 5 properties:
     1) number of fingers (int)
@@ -495,59 +539,20 @@ Thing 9) Personality
     1) make decisions
     2) learn skills
     3) affect health
- */
 
-/*
-=================
-Part 1d - Step 3: Commit
-=================
-Now that you've made changes to the code, make a commit!
-Be sure to make the commit message meaningful.
-*/
-
-/*
-================
-Part 1d - Step 4: Assignment
-================
-    - write the name of the primitive type you'll be using after each property for UDTs 5 - 9.
-    - You already did this for UDTs 1-4 in Part 1c.
-    - Pick properties that can be represented with 'int float double bool char std::string'
+Thing 10) Human
+5 properties:
+    1) Arms
+    2) Legs
+    3) Skin
+    4) Health
+    5) Personality
+3 things it can do:
+    1) Excercise
+    2) Make friends
+    3) Get angry
     
-example: 
-    Display:
-        Number of Pixels (int)
-        Amount of Power consumed (milliwatt-hours) (float)
-        Brightness (double)
-        width in cm (int)
-        height in cm (int)
 */
-
-/*
-=================
-Part 1d - Step 5: Commit
-=================
-Now that you've made changes to the code, make a commit!
-Be sure to make the commit message meaningful.
-*/
-
-/*
-===================
-Part 1d - Step 6: assignment
-===================
-You've just defined 10 UDTs!
-4 of them are unrelated (UDTs 1-4).
-5 of them form the sub-objects that make up the 10th UDT. 
-
-MOVE THEM to the space below this block comment and put them in numerical order 
-(1 - 10).
-    DO NOT COPY. 
-    CUT AND PASTE. 
-    I do not want to see 2 copies of your Plain-English UDTs.  
-    I only want to see the 10 UDTs written BELOW this block comment, in numerical order (1 - 10).
-    simply CUT and PASTE them in the space provided below:
-*/
-
-
 
 
 
