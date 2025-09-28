@@ -449,7 +449,7 @@ Thing 2) Coffee Maker
     1) Amount of water (int)
     2) Amount of coffee bean X (int)
     3) Amount of coffee bean Y (int)
-    4) Interface (void)
+    4) Interface (std::string)
     5) Timer (int)
 3 things it can do:
     1) Make coffee
@@ -458,9 +458,9 @@ Thing 2) Coffee Maker
 
 Thing 3) Fire alarm system
 5 properties:
-    1) Smoke detector (void)
+    1) Smoke detector (std::string)
     2) Speaker (std::string)
-    3) Phone Line (void)
+    3) Phone Line (int)
     4) Camera (std::string)
     5) Memory (double)
 3 things it can do:
@@ -473,7 +473,7 @@ Thing 4) Keyboard
     1) Number of keys (int)
     2) Volume (float)
     3) Mode (std::string)
-    4) LCD screen (void)
+    4) LCD screen (double)
     5) Pedal (bool)
 3 things it can do:
     1) Play sound
@@ -483,9 +483,9 @@ Thing 4) Keyboard
 Thing 5) Arms
 5 properties:
     1) number of fingers (int)
-    2) flexibility (int)
-    3) strength (int)
-    4) reach (int)
+    2) side (char) - l or r
+    3) strength (float)
+    4) reach (float)
     5) condition (std::string)
 3 things it can do:
     1) grab object
@@ -495,9 +495,9 @@ Thing 5) Arms
 Thing 6) Legs
 5 properties:
     1) number of toes (int)
-    2) ankle flexibility (int)
+    2) side (char) - l or r
     3) strength (int)
-    4) knee joint range (int)
+    4) knee joint range (float)
     5) condition (std::string)
 3 things it can do:
     1) kick
@@ -507,8 +507,8 @@ Thing 6) Legs
 Thing 7) Skin
 5 properties:
     1) color (std::string)
-    2) thickness (int)
-    3) wrinkles (int)
+    2) thickness (float)
+    3) wrinkles (double)
     4) age (int)
     5) condition (std::string)
 3 things it can do:
@@ -518,10 +518,10 @@ Thing 7) Skin
 
 Thing 8) Health
 5 properties:
-    1) blood pressure (int)
-    2) weight (int)
-    3) height (int)
-    4) sleep time (int)
+    1) blood type (char)
+    2) weight (float)
+    3) height (float)
+    4) sleep time in hours (int)
     5) condition (std::string)
 3 things it can do:
     1) change condition (eg. fall ill)
@@ -530,11 +530,11 @@ Thing 8) Health
 
 Thing 9) Personality
 5 properties:
-    1) IQ (int)
-    2) EQ (int)
+    1) IQ (float)
+    2) gender (char)
     3) personality type (std::string)
     4) interactions per day (int)
-    5) special qualities (std::string)
+    5) is introvert (bool)
 3 things it can do:
     1) make decisions
     2) learn skills
