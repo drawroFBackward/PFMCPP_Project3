@@ -628,10 +628,15 @@ struct Camera
 {
     //5 properties:
     //    - lens
+    std::string lens = "Canon";
     //    - film
+    std::string film = "Polaroid";
     //    - zoom
+    float zoom = 10.0f;
     //    - shutter speed
+    float shutterSpeed = 100.0f;
     //    - capture button
+    bool captureButton = false;
     //3 things it can do:
     //    - take picture
     //    - take video
@@ -642,10 +647,15 @@ struct CoffeeMaker
 {
     //5 properties:
     //    - Amount of water
+    int amountOfWater = 100;
     //    - Amount of coffee bean X
+    int amountOfCoffeeBeanX = 10;
     //    - Amount of coffee bean Y
+    int amountOfCoffeeBeanY = 10;
     //    - Interface
+    std::string interface = "Touchscreen";
     //    - Timer
+    int timer = 10;
     //3 things it can do:
     //    - Make coffee
     //    - Receive coffee request
@@ -656,10 +666,15 @@ struct FireAlarmSystem
 {
     //5 properties:
     //    - Smoke detector
+    std::string smokeDetector = "Siemens";
     //    - Speaker
+    std::string speaker = "Sony";
     //    - Phone Line
+    int phoneLine = 1;
     //    - Camera
+    std::string camera = "Canon";
     //    - Memory
+    double memory = 100.0;
     //3 things it can do:
     //    - Detect fire
     //    - Sound alarm
@@ -670,10 +685,15 @@ struct Keyboard
 {
     //5 properties:
     //    - Number of keys
+    int numberOfKeys = 88;
     //    - Volume
+    float volume = 10.0f;
     //    - Mode
+    std::string mode = "Acoustic";
     //    - LCD screen
+    double lcdScreen = 10.0;
     //    - Pedal
+    bool pedal = false;
     //3 things it can do:
     //    - Play sound
     //    - change mode
@@ -684,10 +704,15 @@ struct Arms
 {
     //5 properties:
     //    - number of fingers
+    int numberOfFingers = 5;
     //    - side - l or r
+    char side = 'l';
     //    - strength
+    float strength = 10.0f;
     //    - reach
+    float reach = 10.0f;
     //    - condition
+    std::string condition = "Good";
     //3 things it can do:
     //    - grab object
     //    - move object
@@ -698,10 +723,15 @@ struct Legs
 {
     //5 properties:
     //    - number of toes
+    int numberOfToes = 5;
     //    - side - l or r
+    char side = 'l';
     //    - strength
+    int strength = 10;
     //    - knee joint range
+    float kneeJointRange = 90.0f;
     //    - condition
+    std::string condition = "Injured";
     //3 things it can do:
     //    - kick
     //    - juggle a ball
@@ -712,10 +742,15 @@ struct Skin
 {
     //5 properties:
     //    - color
+    std::string color = "Brown";
     //    - thickness
+    float thickness = 1.0f;
     //    - wrinkles
+    double wrinkles = 10.0;
     //    - age
+    int age = 30;
     //    - condition
+    std::string condition = "Burnt";
     //3 things it can do:
     //    - break (bleed)
     //    - burn
@@ -726,10 +761,15 @@ struct Health
 {
     //5 properties:
     //    - blood type
+    char bloodType = 'A';
     //    - weight
+    float weight = 100.0f;
     //    - height
+    float height = 180.0f;
     //    - sleep time in hours
+    int sleepTimeInHours = 8;
     //    - condition
+    std::string condition = "Sick";
     //3 things it can do:
     //    - change condition (eg. fall ill)
     //    - gain weight
@@ -740,10 +780,15 @@ struct Personality
 {
     //5 properties:
     //    - IQ
+    float iq = 200.0f;
     //    - gender
+    char gender = 'F';
     //    - personality type
+    std::string personalityType = "INFJ";
     //    - interactions per day
+    int interactionsPerDay = 10;
     //    - is introvert
+    bool isIntrovert = true;
     //3 things it can do:
     //    - make decisions
     //    - learn skills
@@ -754,10 +799,15 @@ struct Human
 {
     //5 properties:
     //    - Arms
+    Arms leftArm;
     //    - Legs
+    Legs leftLeg;
     //    - Skin
+    Skin skin;
     //    - Health
+    Health health;
     //    - Personality
+    Personality personality_1;
     //3 things it can do:
     //    - Excercise
     //    - Make friends
