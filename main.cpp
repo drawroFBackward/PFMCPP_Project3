@@ -626,52 +626,142 @@ Notice that the struct name 'CarWash' conforms with the Course Coding Standard, 
 */
 struct Camera
 {
-    
+    //5 properties:
+    //    - lens
+    //    - film
+    //    - zoom
+    //    - shutter speed
+    //    - capture button
+    //3 things it can do:
+    //    - take picture
+    //    - take video
+    //    - flash
 };
 
 struct CoffeeMaker
 {
-    
+    //5 properties:
+    //    - Amount of water
+    //    - Amount of coffee bean X
+    //    - Amount of coffee bean Y
+    //    - Interface
+    //    - Timer
+    //3 things it can do:
+    //    - Make coffee
+    //    - Receive coffee request
+    //    - Decline coffee request
 };
 
 struct FireAlarmSystem
 {
-    
+    //5 properties:
+    //    - Smoke detector
+    //    - Speaker
+    //    - Phone Line
+    //    - Camera
+    //    - Memory
+    //3 things it can do:
+    //    - Detect fire
+    //    - Sound alarm
+    //    - Alert fire department
 };
 
 struct Keyboard
 {
-
+    //5 properties:
+    //    - Number of keys
+    //    - Volume
+    //    - Mode
+    //    - LCD screen
+    //    - Pedal
+    //3 things it can do:
+    //    - Play sound
+    //    - change mode
+    //    - display mode
 };
 
 struct Arms
 {
-
+    //5 properties:
+    //    - number of fingers
+    //    - side - l or r
+    //    - strength
+    //    - reach
+    //    - condition
+    //3 things it can do:
+    //    - grab object
+    //    - move object
+    //    - punch
 };
 
 struct Legs
 {
-
+    //5 properties:
+    //    - number of toes
+    //    - side - l or r
+    //    - strength
+    //    - knee joint range
+    //    - condition
+    //3 things it can do:
+    //    - kick
+    //    - juggle a ball
+    //    - jump
 };
 
 struct Skin
 {
-
+    //5 properties:
+    //    - color
+    //    - thickness
+    //    - wrinkles
+    //    - age
+    //    - condition
+    //3 things it can do:
+    //    - break (bleed)
+    //    - burn
+    //    - stretch
 };
 
 struct Health
 {
-
+    //5 properties:
+    //    - blood type
+    //    - weight
+    //    - height
+    //    - sleep time in hours
+    //    - condition
+    //3 things it can do:
+    //    - change condition (eg. fall ill)
+    //    - gain weight
+    //    - increase height
 };
 
 struct Personality
 {
-
+    //5 properties:
+    //    - IQ
+    //    - gender
+    //    - personality type
+    //    - interactions per day
+    //    - is introvert
+    //3 things it can do:
+    //    - make decisions
+    //    - learn skills
+    //    - affect health
 };
 
 struct Human
 {
-
+    //5 properties:
+    //    - Arms
+    //    - Legs
+    //    - Skin
+    //    - Health
+    //    - Personality
+    //3 things it can do:
+    //    - Excercise
+    //    - Make friends
+    //    - Get angry
 };
 
 /*
