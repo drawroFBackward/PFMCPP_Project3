@@ -639,8 +639,11 @@ struct Camera
     bool captureButton = false;
     //3 things it can do:
     //    - take picture
+    double takePicture(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton);//returns picture data (i know images are 2x2 arrays of pixels, but i'm gonna ignore that and pretend it's a double))
     //    - take video
+    double takeVideo(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton);//same as above but for video
     //    - flash
+    void flash();//turns on flash (which in hindsight I cd have put down as a bool property)
 };
 
 struct CoffeeMaker
@@ -658,8 +661,11 @@ struct CoffeeMaker
     int timer = 10;
     //3 things it can do:
     //    - Make coffee
+    void makeCoffee(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY, std::string interface, int timer);
     //    - Receive coffee request
+    void receiveCoffeeRequest(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY);
     //    - Decline coffee request
+    std::string declineCoffeeRequest(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY);//returns reason for declining
 };
 
 struct FireAlarmSystem
@@ -677,8 +683,11 @@ struct FireAlarmSystem
     double memory = 100.0;
     //3 things it can do:
     //    - Detect fire
+    bool detectFire(std::string smokeDetector, std::string camera, double memory);//returns true if fire is detected
     //    - Sound alarm
+    void soundAlarm(std::string speaker);
     //    - Alert fire department
+    void alertFireDepartment(int phoneLine, std::string camera, double memory);
 };
 
 struct Keyboard
@@ -696,8 +705,11 @@ struct Keyboard
     bool pedal = false;
     //3 things it can do:
     //    - Play sound
+    void playSound(float volume, std::string mode, bool pedal);
     //    - change mode
+    void changeMode(std::string mode);
     //    - display mode
+    void displayMode(std::string mode, double lcdScreen);
 };
 
 struct Arms
