@@ -727,8 +727,11 @@ struct Arms
     std::string condition = "Good";
     //3 things it can do:
     //    - grab object
+	bool grabObject(int numberOfFingers, char side, float strength, float reach, std::string condition);//returns true if object is grabbed
     //    - move object
+	void moveObject(int numberOfFingers, char side, float strength, float reach, std::string condition);
     //    - punch
+	void punch(char side, float strength, std::string condition);
 };
 
 struct Legs
@@ -746,8 +749,11 @@ struct Legs
     std::string condition = "Injured";
     //3 things it can do:
     //    - kick
+	void kick(int numberOfToes, char side, int strength, float kneeJointRange, std::string condition);
     //    - juggle a ball
+	void juggleABall(char side, std::string condition);
     //    - jump
+	float jump(char side, int strength, float kneeJointRange, std::string condition);//returns height jumped
 };
 
 struct Skin
@@ -765,8 +771,11 @@ struct Skin
     std::string condition = "Burnt";
     //3 things it can do:
     //    - break (bleed)
+	void tear(float thickness, int age, std::string condition);
     //    - burn
+	void burn(float thickness, int age, std::string condition);
     //    - stretch
+	float stretch(float thickness, int age, std::string condition);//returns amount stretched
 };
 
 struct Health
@@ -784,8 +793,11 @@ struct Health
     std::string condition = "Sick";
     //3 things it can do:
     //    - change condition (eg. fall ill)
+	std::string changeCondition(std::string condition, int sleepTimeInHours, float weight, float height);//returns new condition
     //    - gain weight
+	float gainWeight(float weight, int sleepTimeInHours, std::string condition);//returns new weight
     //    - increase height
+	float increaseHeight(float height, int sleepTimeInHours, std::string condition);//returns new height
 };
 
 struct Personality
@@ -803,8 +815,11 @@ struct Personality
     bool isIntrovert = true;
     //3 things it can do:
     //    - make decisions
+	bool goToWork(std::string personalityType, int interactionsPerDay);//returns true if goes to work
     //    - learn skills
+	std::string learnSkill(float iq, std::string personalityType;//returns skill learned
     //    - affect health
+	std::string newHealth(std::string personalityType, int interactionsPerDay, bool isIntrovert);//returns new health condition
 };
 
 struct Human
@@ -822,8 +837,11 @@ struct Human
     Personality personality_1;
     //3 things it can do:
     //    - Excercise
+	void excercise(Arms leftArm, Legs leftLeg, Skin skin, Health health, Personality personality_1);
     //    - Make friends
+	int makeFriends(Personality personality_1, Health health, Skin skin);//returns number of friends made
     //    - Get angry
+	void getAngry(Personality personality_1);
 };
 
 /*
