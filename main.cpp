@@ -724,6 +724,8 @@ struct Keyboard
     void changeMode(std::string mode);
     //    - display mode
     void displayMode(std::string mode, double lcdScreen);
+
+	key key_1;
 };
 
 struct Arms
@@ -847,7 +849,9 @@ struct Personality
     //    - learn skills
 	std::string learnSkill(float iq, std::string personalityType;//returns skill learned
     //    - change mood
-	mood newMood(std::string personalityType, int interactionsPerDay, bool isIntrovert, mood mood);//returns new mood
+	mood newMood(std::string personalityType, int interactionsPerDay, bool isIntrovert, mood Mood);//returns new mood
+
+	mood Mood;
 };
 
 struct Human
