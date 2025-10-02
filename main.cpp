@@ -703,6 +703,20 @@ struct Keyboard
     double lcdScreen = 10.0;
     //    - Pedal
     bool pedal = false;
+    //nested struct
+    struct key
+    {
+        //properties
+		char name;
+		bool isPressed;
+		float frequency;
+		bool isBlackKey;
+		float tuning;
+		//actions
+		void playKey(char name, bool isPressed, float frequency, float tuning);
+		void stopKey(char name, bool isPressed);
+		void tuneKey(char name, float tuning);
+    };
     //3 things it can do:
     //    - Play sound
     void playSound(float volume, std::string mode, bool pedal);
@@ -813,13 +827,27 @@ struct Personality
     int interactionsPerDay = 10;
     //    - is introvert
     bool isIntrovert = true;
+    // nested struct
+    struct mood
+    {
+        //properties
+        int happinessRating;
+		bool stressed;
+		int energyLevel;
+		int age;
+		std::string environment;
+		//actions
+		float probabilityOfChangingMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment);//returns probability of changing mood
+		int timeToChangeMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment);//returns time in minutes to change mood
+
+    };
     //3 things it can do:
     //    - make decisions
 	bool goToWork(std::string personalityType, int interactionsPerDay);//returns true if goes to work
     //    - learn skills
 	std::string learnSkill(float iq, std::string personalityType;//returns skill learned
-    //    - affect health
-	std::string newHealth(std::string personalityType, int interactionsPerDay, bool isIntrovert);//returns new health condition
+    //    - change mood
+	mood newMood(std::string personalityType, int interactionsPerDay, bool isIntrovert, mood mood);//returns new mood
 };
 
 struct Human
