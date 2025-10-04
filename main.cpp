@@ -83,51 +83,51 @@ Main Object: Car Interior
         Name 4 nouns you'll find on the [Sub Object]
             1) paddle shifters
             2) 'cruise control' controls
-            3) 
-            4) 
+            3) horn button
+            4) answer phone button
         Name 2 actions that the [Sub Object] can do:
             1) adjust cruise control settings.
-            2)
+            2) blow the horn
         
     Sub Object: Instrument Cluster
         Name 4 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
-            4)
+            1) speedometer
+            2) fuel gauge
+            3) odometer
+            4) temperature gauge
         Name 3 actions that the [Sub Object] can do:
-            1)
-            2)
-            3)
+            1) tell speed
+            2) tell fuel level
+            3) tell temperature
     
     Sub Object: Environment Controls
         Name 3 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
+            1) mode
+            2) temperature knob
+            3) fanspeed knob
         Name 3 actions that the [Sub Object] can do:
-            1)
-            2)
-            3)
+            1) change mode from fan to ac
+            2) change temperature
+            3) change fan speed
 
     Sub Object: Infotainment System
         Name 3 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
+            1) channel button
+            2) volume knob
+            3) on/off button
         Name 3 actions that the [Sub Object] can do:
-            1)
-            2)
-            3)
+            1) turn on/off
+            2) change channel
+            3) change volume
 
     Sub Object: Seat 
         Name 3 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
+            1) temperature sensor
+            2) seatbelt
+            3) recline control button
         Name 2 actions that the [Sub Object] can do:
-            1)
-            2)
+            1) recline
+            2) warm seat
 */
 
 /*
@@ -196,53 +196,6 @@ Part 1b - Step 2: Assignment
         c) pick properties that can eventually be represented with 
         'int float double bool char std::string'.
 
-Thing 1)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
-
-Thing 2)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
-
-Thing 3)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
-
-Thing 4)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
 */
 
 /*
@@ -320,6 +273,8 @@ example:
         brand (std::string)
 */
 
+// 1c Step 2 completed in Part 1b
+
 /*
 =================
 Part 1c - Step 3: Commit
@@ -337,17 +292,6 @@ Define an object that is made of 5 sub-objects.
     These 5 sub-objects will not be defined using Primitives, but instead will be their own UDTs 
     you'll define these 5 sub-objects in Part 1d.
 
-Thing 10)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
  */
 
  /*
@@ -434,65 +378,6 @@ example:
     You will need to provide 5 properties and 3 member functions of that Engine object in plain English.
     Remember to pick properties that can be represented with 'int float double bool char std::string'.
 
-Thing 5)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
-
-Thing 6)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
-
-Thing 7)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
-
-Thing 8)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
-
-Thing 9)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
  */
 
 /*
@@ -545,7 +430,129 @@ MOVE THEM to the space below this block comment and put them in numerical order
     simply CUT and PASTE them in the space provided below:
 */
 
+/*
 
+Thing 1) Camera
+5 properties:
+    1) lens (std::string)
+    2) film (std::string)
+    3) zoom (float)
+    4) shutter speed (float)
+    5) capture button (bool)
+3 things it can do:
+    1) take picture
+    2) take video
+    3) flash
+
+Thing 2) Coffee Maker
+5 properties:
+    1) Amount of water (int)
+    2) Amount of coffee bean X (int)
+    3) Amount of coffee bean Y (int)
+    4) Interface (std::string)
+    5) Timer (int)
+3 things it can do:
+    1) Make coffee
+    2) Receive coffee request
+    3) Decline coffee request
+
+Thing 3) Fire alarm system
+5 properties:
+    1) Smoke detector (std::string)
+    2) Speaker (std::string)
+    3) Phone Line (int)
+    4) Camera (std::string)
+    5) Memory (double)
+3 things it can do:
+    1) Detect fire
+    2) Sound alarm
+    3) Alert fire department
+
+Thing 4) Keyboard
+5 properties:
+    1) Number of keys (int)
+    2) Volume (float)
+    3) Mode (std::string)
+    4) LCD screen (double)
+    5) Pedal (bool)
+3 things it can do:
+    1) Play sound
+    2) change mode
+    3) display mode
+
+Thing 5) Arms
+5 properties:
+    1) number of fingers (int)
+    2) side (char) - l or r
+    3) strength (float)
+    4) reach (float)
+    5) condition (std::string)
+3 things it can do:
+    1) grab object
+    2) move object
+    3) punch
+
+Thing 6) Legs
+5 properties:
+    1) number of toes (int)
+    2) side (char) - l or r
+    3) strength (int)
+    4) knee joint range (float)
+    5) condition (std::string)
+3 things it can do:
+    1) kick
+    2) juggle a ball
+    3) jump
+
+Thing 7) Skin
+5 properties:
+    1) color (std::string)
+    2) thickness (float)
+    3) wrinkles (double)
+    4) age (int)
+    5) condition (std::string)
+3 things it can do:
+    1) break (bleed)
+    2) burn
+    3) stretch
+
+Thing 8) Health
+5 properties:
+    1) blood type (char)
+    2) weight (float)
+    3) height (float)
+    4) sleep time in hours (int)
+    5) condition (std::string)
+3 things it can do:
+    1) change condition (eg. fall ill)
+    2) gain weight
+    3) increase height
+
+Thing 9) Personality
+5 properties:
+    1) IQ (float)
+    2) gender (char)
+    3) personality type (std::string)
+    4) interactions per day (int)
+    5) is introvert (bool)
+3 things it can do:
+    1) make decisions
+    2) learn skills
+    3) affect health
+
+Thing 10) Human
+5 properties:
+    1) Arms
+    2) Legs
+    3) Skin
+    4) Health
+    5) Personality
+3 things it can do:
+    1) Excercise
+    2) Make friends
+    3) Get angry
+    
+*/
 
 
 
@@ -617,6 +624,7 @@ struct CarWash  //This is the empty struct, below my plain-English UDT.
 /*
 Notice that the struct name 'CarWash' conforms with the Course Coding Standard, described in the Readme.MD
 */
+
 
 /*
 =================
@@ -1010,6 +1018,257 @@ Part 1e - Step 19: Request a review
 paste your code below
 */
 
+struct Camera
+{
+    //5 properties:
+    //    - lens
+    std::string lens = "Canon";
+    //    - film
+    std::string film = "Polaroid";
+    //    - zoom
+    float zoom = 10.0f;
+    //    - shutter speed
+    float shutterSpeed = 100.0f;
+    //    - capture button
+    bool captureButton = false;
+    //3 things it can do:
+    //    - take picture
+    double takePicture(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton);//returns picture data (i know images are 2x2 arrays of pixels, but i'm gonna ignore that and pretend it's a double))
+    //    - take video
+    double takeVideo(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton);//same as above but for video
+    //    - flash
+    void flash();//turns on flash (which in hindsight I cd have put down as a bool property)
+};
+
+struct CoffeeMaker
+{
+    //5 properties:
+    //    - Amount of water
+    int amountOfWater = 100;
+    //    - Amount of coffee bean X
+    int amountOfCoffeeBeanX = 10;
+    //    - Amount of coffee bean Y
+    int amountOfCoffeeBeanY = 10;
+    //    - Interface
+    std::string interface = "Touchscreen";
+    //    - Timer
+    int timer = 10;
+    //3 things it can do:
+    //    - Make coffee
+    void makeCoffee(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY, std::string interface, int timer);
+    //    - Receive coffee request
+    void receiveCoffeeRequest(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY);
+    //    - Decline coffee request
+    std::string declineCoffeeRequest(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY);//returns reason for declining
+};
+
+struct FireAlarmSystem
+{
+    //5 properties:
+    //    - Smoke detector
+    std::string smokeDetector = "Siemens";
+    //    - Speaker
+    std::string speaker = "Sony";
+    //    - Phone Line
+    int phoneLine = 1;
+    //    - Camera
+    std::string camera = "Canon";
+    //    - Memory
+    double memory = 100.0;
+    //3 things it can do:
+    //    - Detect fire
+    bool detectFire(std::string smokeDetector, std::string camera, double memory);//returns true if fire is detected
+    //    - Sound alarm
+    void soundAlarm(std::string speaker);
+    //    - Alert fire department
+    void alertFireDepartment(int phoneLine, std::string camera, double memory);
+};
+
+struct Keyboard
+{
+    //5 properties:
+    //    - Number of keys
+    int numberOfKeys = 88;
+    //    - Volume
+    float volume = 10.0f;
+    //    - Mode
+    std::string mode = "Acoustic";
+    //    - LCD screen
+    double lcdScreen = 10.0;
+    //    - Pedal
+    bool pedal = false;
+    //nested struct
+    struct key
+    {
+        //properties
+        char name;
+        bool isPressed;
+        float frequency;
+        bool isBlackKey;
+        float tuning;
+        //actions
+        void playKey(char name, bool isPressed, float frequency, float tuning);
+        void stopKey(char name, bool isPressed);
+        void tuneKey(char name, float tuning);
+    };
+    //3 things it can do:
+    //    - Play sound
+    void playSound(float volume, std::string mode, bool pedal);
+    //    - change mode
+    void changeMode(std::string mode);
+    //    - display mode
+    void displayMode(std::string mode, double lcdScreen);
+
+    key key_1;
+};
+
+struct Arms
+{
+    //5 properties:
+    //    - number of fingers
+    int numberOfFingers = 5;
+    //    - side - l or r
+    char side = 'l';
+    //    - strength
+    float strength = 10.0f;
+    //    - reach
+    float reach = 10.0f;
+    //    - condition
+    std::string condition = "Good";
+    //3 things it can do:
+    //    - grab object
+    bool grabObject(int numberOfFingers, char side, float strength, float reach, std::string condition);//returns true if object is grabbed
+    //    - move object
+    void moveObject(int numberOfFingers, char side, float strength, float reach, std::string condition);
+    //    - punch
+    void punch(char side, float strength, std::string condition);
+};
+
+struct Legs
+{
+    //5 properties:
+    //    - number of toes
+    int numberOfToes = 5;
+    //    - side - l or r
+    char side = 'l';
+    //    - strength
+    int strength = 10;
+    //    - knee joint range
+    float kneeJointRange = 90.0f;
+    //    - condition
+    std::string condition = "Injured";
+    //3 things it can do:
+    //    - kick
+    void kick(int numberOfToes, char side, int strength, float kneeJointRange, std::string condition);
+    //    - juggle a ball
+    void juggleABall(char side, std::string condition);
+    //    - jump
+    float jump(char side, int strength, float kneeJointRange, std::string condition);//returns height jumped
+};
+
+struct Skin
+{
+    //5 properties:
+    //    - color
+    std::string color = "Brown";
+    //    - thickness
+    float thickness = 1.0f;
+    //    - wrinkles
+    double wrinkles = 10.0;
+    //    - age
+    int age = 30;
+    //    - condition
+    std::string condition = "Burnt";
+    //3 things it can do:
+    //    - break (bleed)
+    void tear(float thickness, int age, std::string condition);
+    //    - burn
+    void burn(float thickness, int age, std::string condition);
+    //    - stretch
+    float stretch(float thickness, int age, std::string condition);//returns amount stretched
+};
+
+struct Health
+{
+    //5 properties:
+    //    - blood type
+    char bloodType = 'A';
+    //    - weight
+    float weight = 100.0f;
+    //    - height
+    float height = 180.0f;
+    //    - sleep time in hours
+    int sleepTimeInHours = 8;
+    //    - condition
+    std::string condition = "Sick";
+    //3 things it can do:
+    //    - change condition (eg. fall ill)
+    std::string changeCondition(std::string condition, int sleepTimeInHours, float weight, float height);//returns new condition
+    //    - gain weight
+    float gainWeight(float weight, int sleepTimeInHours, std::string condition);//returns new weight
+    //    - increase height
+    float increaseHeight(float height, int sleepTimeInHours, std::string condition);//returns new height
+};
+
+struct Personality
+{
+    //5 properties:
+    //    - IQ
+    float iq = 200.0f;
+    //    - gender
+    char gender = 'F';
+    //    - personality type
+    std::string personalityType = "INFJ";
+    //    - interactions per day
+    int interactionsPerDay = 10;
+    //    - is introvert
+    bool isIntrovert = true;
+    // nested struct
+    struct mood
+    {
+        //properties
+        int happinessRating;
+        bool stressed;
+        int energyLevel;
+        int age;
+        std::string environment;
+        //actions
+        float probabilityOfChangingMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment);//returns probability of changing mood
+        int timeToChangeMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment);//returns time in minutes to change mood
+
+    };
+    //3 things it can do:
+    //    - make decisions
+    bool goToWork(std::string personalityType, int interactionsPerDay);//returns true if goes to work
+    //    - learn skills
+    std::string learnSkill(float iq, std::string personalityType);//returns skill learned
+    //    - change mood
+    mood newMood(std::string personalityType, int interactionsPerDay, bool isIntrovert, mood Mood);//returns new mood
+
+    mood Mood;
+};
+
+struct Human
+{
+    //5 properties:
+    //    - Arms
+    Arms leftArm;
+    //    - Legs
+    Legs leftLeg;
+    //    - Skin
+    Skin skin;
+    //    - Health
+    Health health;
+    //    - Personality
+    Personality personality_1;
+    //3 things it can do:
+    //    - Excercise
+    void excercise(Arms leftArm, Legs leftLeg, Skin skin, Health health, Personality personality_1);
+    //    - Make friends
+    int makeFriends(Personality personality_1, Health health, Skin skin);//returns number of friends made
+    //    - Get angry
+    void getAngry(Personality personality_1);
+};
 
 
 
