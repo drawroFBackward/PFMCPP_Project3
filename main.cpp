@@ -1241,7 +1241,7 @@ struct Personality
     //    - make decisions
     bool goToWork(std::string personalityType, int interactionsPerDay);//returns true if goes to work
     //    - learn skills
-    std::string learnSkill(float iq, std::string personalityType;//returns skill learned
+    std::string learnSkill(float iq, std::string personalityType);//returns skill learned
     //    - change mood
     mood newMood(std::string personalityType, int interactionsPerDay, bool isIntrovert, mood Mood);//returns new mood
 
