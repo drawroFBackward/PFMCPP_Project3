@@ -134,253 +134,147 @@ struct CarWash
 
 struct Camera
 {
-    //5 properties:
-    //    - lens
     std::string lens = "Canon";
-    //    - film
     std::string film = "Polaroid";
-    //    - zoom
     float zoom = 10.0f;
-    //    - shutter speed
     float shutterSpeed = 100.0f;
-    //    - capture button
     bool captureButton = false;
-    //3 things it can do:
-    //    - take picture
-    double takePicture(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton);//returns picture data (i know images are 2x2 arrays of pixels, but i'm gonna ignore that and pretend it's a double))
-    //    - take video
-    double takeVideo(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton);//same as above but for video
-    //    - flash
-    void flash();//turns on flash (which in hindsight I cd have put down as a bool property)
+    double takePicture(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton);
+    double takeVideo(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton);
+    void flash();
 };
 
 struct CoffeeMaker
 {
-    //5 properties:
-    //    - Amount of water
     int amountOfWater = 100;
-    //    - Amount of coffee bean X
     int amountOfCoffeeBeanX = 10;
-    //    - Amount of coffee bean Y
     int amountOfCoffeeBeanY = 10;
-    //    - Interface
     std::string interface = "Touchscreen";
-    //    - Timer
     int timer = 10;
-    //3 things it can do:
-    //    - Make coffee
     void makeCoffee(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY, std::string interface, int timer);
-    //    - Receive coffee request
     void receiveCoffeeRequest(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY);
-    //    - Decline coffee request
-    std::string declineCoffeeRequest(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY);//returns reason for declining
+    std::string declineCoffeeRequest(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY);
 };
 
 struct FireAlarmSystem
 {
-    //5 properties:
-    //    - Smoke detector
     std::string smokeDetector = "Siemens";
-    //    - Speaker
     std::string speaker = "Sony";
-    //    - Phone Line
     int phoneLine = 1;
-    //    - Camera
     std::string camera = "Canon";
-    //    - Memory
     double memory = 100.0;
-    //3 things it can do:
-    //    - Detect fire
-    bool detectFire(std::string smokeDetector, std::string camera, double memory);//returns true if fire is detected
-    //    - Sound alarm
+    bool detectFire(std::string smokeDetector, std::string camera, double memory);
     void soundAlarm(std::string speaker);
-    //    - Alert fire department
     void alertFireDepartment(int phoneLine, std::string camera, double memory);
 };
 
 struct Keyboard
 {
-    //5 properties:
-    //    - Number of keys
     int numberOfKeys = 88;
-    //    - Volume
     float volume = 10.0f;
-    //    - Mode
     std::string mode = "Acoustic";
-    //    - LCD screen
     double lcdScreen = 10.0;
-    //    - Pedal
     bool pedal = false;
-    //nested struct
-    struct key FIXME Type names should use CamelCase
+    struct Key
     {
-        //properties
         char name;
         bool isPressed;
         float frequency;
         bool isBlackKey;
         float tuning;
-        //actions
         void playKey(char name, bool isPressed, float frequency, float tuning);
         void stopKey(char name, bool isPressed);
         void tuneKey(char name, float tuning);
     };
-    //3 things it can do:
-    //    - Play sound
     void playSound(float volume, std::string mode, bool pedal);
-    //    - change mode
     void changeMode(std::string mode);
-    //    - display mode
     void displayMode(std::string mode, double lcdScreen);
 
-    key key_1;
+    Key key_1;
 };
 
 struct Arms
 {
-    //5 properties:
-    //    - number of fingers
     int numberOfFingers = 5;
-    //    - side - l or r
     char side = 'l';
-    //    - strength
     float strength = 10.0f;
-    //    - reach
     float reach = 10.0f;
-    //    - condition
     std::string condition = "Good";
-    //3 things it can do:
-    //    - grab object
-    bool grabObject(int numberOfFingers, char side, float strength, float reach, std::string condition);//returns true if object is grabbed
-    //    - move object
+    bool grabObject(int numberOfFingers, char side, float strength, float reach, std::string condition);
     void moveObject(int numberOfFingers, char side, float strength, float reach, std::string condition);
-    //    - punch
     void punch(char side, float strength, std::string condition);
 };
 
 struct Legs
 {
-    //5 properties:
-    //    - number of toes
     int numberOfToes = 5;
-    //    - side - l or r
     char side = 'l';
-    //    - strength
     int strength = 10;
-    //    - knee joint range
     float kneeJointRange = 90.0f;
-    //    - condition
     std::string condition = "Injured";
-    //3 things it can do:
-    //    - kick
     void kick(int numberOfToes, char side, int strength, float kneeJointRange, std::string condition);
-    //    - juggle a ball
     void juggleABall(char side, std::string condition);
-    //    - jump
-    float jump(char side, int strength, float kneeJointRange, std::string condition);//returns height jumped
+    float jump(char side, int strength, float kneeJointRange, std::string condition);
 };
 
 struct Skin
 {
-    //5 properties:
-    //    - color
     std::string color = "Brown";
-    //    - thickness
     float thickness = 1.0f;
-    //    - wrinkles
     double wrinkles = 10.0;
-    //    - age
     int age = 30;
-    //    - condition
     std::string condition = "Burnt";
-    //3 things it can do:
-    //    - break (bleed)
     void tear(float thickness, int age, std::string condition);
-    //    - burn
     void burn(float thickness, int age, std::string condition);
-    //    - stretch
-    float stretch(float thickness, int age, std::string condition);//returns amount stretched
+    float stretch(float thickness, int age, std::string condition);
 };
 
 struct Health
 {
-    //5 properties:
-    //    - blood type
     char bloodType = 'A';
-    //    - weight
     float weight = 100.0f;
-    //    - height
     float height = 180.0f;
-    //    - sleep time in hours
     int sleepTimeInHours = 8;
-    //    - condition
     std::string condition = "Sick";
-    //3 things it can do:
-    //    - change condition (eg. fall ill)
-    std::string changeCondition(std::string condition, int sleepTimeInHours, float weight, float height);//returns new condition
-    //    - gain weight
-    float gainWeight(float weight, int sleepTimeInHours, std::string condition);//returns new weight
-    //    - increase height
-    float increaseHeight(float height, int sleepTimeInHours, std::string condition);//returns new height
+    std::string changeCondition(std::string condition, int sleepTimeInHours, float weight, float height);
+    float gainWeight(float weight, int sleepTimeInHours, std::string condition);
+    float increaseHeight(float height, int sleepTimeInHours, std::string condition);
 };
 
 struct Personality
 {
-    //5 properties:
-    //    - IQ
     float iq = 200.0f;
-    //    - gender
     char gender = 'F';
-    //    - personality type
     std::string personalityType = "INFJ";
-    //    - interactions per day
     int interactionsPerDay = 10;
-    //    - is introvert
     bool isIntrovert = true;
-    // nested struct
-    struct mood FIXME Type names should use CamelCase
+    struct Mood
     {
-        //properties
         int happinessRating;
         bool stressed;
         int energyLevel;
         int age;
         std::string environment;
-        //actions
-        float probabilityOfChangingMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment);//returns probability of changing mood
-        int timeToChangeMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment);//returns time in minutes to change mood
+        float probabilityOfChangingMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment);
+        int timeToChangeMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment);
 
     };
-    //3 things it can do:
-    //    - make decisions
-    bool goToWork(std::string personalityType, int interactionsPerDay);//returns true if goes to work
-    //    - learn skills
-    std::string learnSkill(float iq, std::string personalityType);//returns skill learned
-    //    - change mood
-    mood newMood(std::string personalityType, int interactionsPerDay, bool isIntrovert, mood Mood);//returns new mood
+    bool goToWork(std::string personalityType, int interactionsPerDay);
+    std::string learnSkill(float iq, std::string personalityType);
+    Mood newMood(std::string personalityType, int interactionsPerDay, bool isIntrovert, Mood Mood);
 
-    mood Mood;
+    Mood Mood;
 };
 
 struct Human
 {
-    //5 properties:
-    //    - Arms
     Arms leftArm;
-    //    - Legs
     Legs leftLeg;
-    //    - Skin
     Skin skin;
-    //    - Health
     Health health;
-    //    - Personality
     Personality personality_1;
-    //3 things it can do:
-    //    - Excercise
     void excercise(Arms leftArm, Legs leftLeg, Skin skin, Health health, Personality personality_1);
-    //    - Make friends
-    int makeFriends(Personality personality_1, Health health, Skin skin);//returns number of friends made
-    //    - Get angry
+    int makeFriends(Personality personality_1, Health health, Skin skin);
     void getAngry(Personality personality_1);
 };
 
