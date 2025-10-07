@@ -10,6 +10,8 @@ Create a branch named Part2
     You'll need to insert the Person struct from the video in the space below.
  */
 
+#include <iostream>
+
 struct Foot
 {
     float size;
