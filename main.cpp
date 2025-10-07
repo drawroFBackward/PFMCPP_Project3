@@ -125,24 +125,77 @@ struct CoffeeMaker
     int amountOfWater = 100;
     int amountOfCoffeeBeanX = 10;
     int amountOfCoffeeBeanY = 10;
+	float coffeeAmount = 0.0f;
     std::string interface = "Touchscreen";
     int timer = 10;
-    void makeCoffee(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY, std::string interface, int timer);
+    void makeCoffee(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY, int timer);
     void receiveCoffeeRequest(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY);
-    std::string declineCoffeeRequest(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY);
+    void requestForRefill();
 };
+
+void CoffeeMaker::makeCoffee(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY, int timer)
+{
+    for (int i = 0; i < timer; ++i)
+    {
+            coffeeAmount += (amountOfWater / 10.0f) + (amountOfCoffeeBeanX + amountOfCoffeeBeanY) / 20.0f;
+    }
+}
+
+void CoffeeMaker::receiveCoffeeRequest(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY)
+{
+    if (amountOfWater > 0 && amountOfCoffeeBeanX > 0 && amountOfCoffeeBeanY > 0)
+    {
+        std::cout << "Coffee request received." << std::endl;
+		makeCoffee(amountOfWater, amountOfCoffeeBeanX, amountOfCoffeeBeanY, timer);
+    }
+    else
+    {
+		requestForRefill();
+    }
+}
+
+void CoffeeMaker::requestForRefill()
+{
+	std::cout << "Refill ingredients." << std::endl;
+}
 
 struct FireAlarmSystem
 {
     std::string smokeDetector = "Siemens";
-    std::string speaker = "Sony";
+    std::string speaker = "There's a fire";
     int phoneLine = 1;
     std::string camera = "Canon";
-    double memory = 100.0;
-    bool detectFire(std::string smokeDetector, std::string camera, double memory);
+    double smokeLevel = 0.0;
+    bool detectFire(std::string smokeDetector, double memory);
     void soundAlarm(std::string speaker);
     void alertFireDepartment(int phoneLine, std::string camera, double memory);
 };
+
+bool FireAlarmSystem::detectFire(std::string smokeDetector, double smokeLevel)
+{
+    if (smokeDetector == "Siemens" && smokeLevel > 50.0)
+    {
+        return true;
+    }
+    return false;
+}
+
+void FireAlarmSystem::soundAlarm(std::string speaker)
+{
+    if (detectFire(smokeDetector, smokeLevel))
+    {
+        std::cout << speaker << std::endl;
+    }
+}
+
+void FireAlarmSystem::alertFireDepartment(int phoneLine, std::string camera, double memory)
+{
+    if (detectFire(smokeDetector, smokeLevel) && phoneLine > 0 && camera == "Canon")
+    {
+        std::cout << "Alerting fire department." << std::endl;
+		// pretend to send camera footage and call fire department eg. callFireDept(phoneLine); sendFootage(camera, phoneLine);
+    }
+}
 
 struct Keyboard
 {
