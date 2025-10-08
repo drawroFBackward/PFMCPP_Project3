@@ -439,16 +439,98 @@ struct Personality
         std::string environment;
         float probabilityOfChangingMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment);
         int timeToChangeMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment);
-
+		void improveMood(int happinessRating, int energyLevel, std::string environment);
     };
     bool goToWork(std::string personalityType, int interactionsPerDay);
-    std::string learnSkill(float iq, std::string personalityType);
+    bool learnSkill(float iq, std::string personalityType);
     Mood newMood(std::string personalityType, int interactionsPerDay, bool isIntrovert, Mood Mood);
 
     Mood Mood;
 };
 
+float Personality::Mood::probabilityOfChangingMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment)
+{
+    float probability = 0.0f;
+    if (stressed)
+    {
+        probability += 20.0f;
+    }
+    if (happinessRating < 5)
+    {
+        probability += 30.0f;
+    }
+    if (energyLevel < 5)
+    {
+        probability += 25.0f;
+    }
+    if (age < 18)
+    {
+        probability += 15.0f;
+    }
+    if (environment == "Noisy")
+    {
+        probability += 10.0f;
+    }
+    return probability;
+}
 
+int Personality::Mood::timeToChangeMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment)
+{
+    int time = 0;
+    time += happinessRating * 2;
+    if (!stressed)
+    {
+        time += 10;
+    }
+    time += (10 - energyLevel) * 2;
+    if (age < 18)
+    {
+        time += 5;
+    }
+    if (environment == "Noisy")
+    {
+        time += 5;
+    }
+    return time;
+}
+
+void Personality::Mood::improveMood(int happinessRating, int energyLevel, std::string environment)
+{
+    happinessRating += 10;
+	stressed = false;
+    energyLevel += 10;
+    environment =  "Calm";
+}
+
+bool Personality::goToWork(std::string personalityType, int interactionsPerDay)
+{
+    if (personalityType == "INFJ" && interactionsPerDay < 5)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool Personality::learnSkill(float iq, std::string personalityType)
+{
+    if (iq > 100.0f && personalityType == "INFJ")
+    {
+        return true;
+    }
+    return false;
+}
+
+Mood Personality::newMood(std::string personalityType, int interactionsPerDay, bool isIntrovert, Mood Mood)
+{
+    if (personalityType == "INFJ" && interactionsPerDay < 5 && isIntrovert)
+    {
+        Mood.happinessRating = 10;
+        Mood.stressed = false;
+        Mood.energyLevel = 10;
+        Mood.environment = "Calm";
+    }
+    return Mood;
+}
 
 struct Human
 {
