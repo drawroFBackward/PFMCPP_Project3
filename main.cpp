@@ -443,9 +443,9 @@ struct Personality
     };
     bool goToWork(std::string personalityType, int interactionsPerDay);
     bool learnSkill(float iq, std::string personalityType);
-    Mood newMood(std::string personalityType, int interactionsPerDay, bool isIntrovert, Mood Mood);
+    Personality::Mood newMood(std::string personalityType, int interactionsPerDay, bool isIntrovert, Mood Mood);
 
-    Mood Mood;
+    Mood mood;
 };
 
 float Personality::Mood::probabilityOfChangingMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment)
@@ -520,16 +520,16 @@ bool Personality::learnSkill(float iq, std::string personalityType)
     return false;
 }
 
-Mood Personality::newMood(std::string personalityType, int interactionsPerDay, bool isIntrovert, Mood Mood)
+Personality::Mood Personality::newMood(std::string personalityType, int interactionsPerDay, bool isIntrovert, Personality::Mood mood)
 {
     if (personalityType == "INFJ" && interactionsPerDay < 5 && isIntrovert)
     {
-        Mood.happinessRating = 10;
-        Mood.stressed = false;
-        Mood.energyLevel = 10;
-        Mood.environment = "Calm";
+        mood.happinessRating = 10;
+        mood.stressed = false;
+        mood.energyLevel = 10;
+        mood.environment = "Calm";
     }
-    return Mood;
+    return mood;
 }
 
 struct Human
@@ -539,16 +539,42 @@ struct Human
     Skin skin;
     Health health;
     Personality personality_1;
-    void excercise(Arms leftArm, Legs leftLeg, Skin skin, Health health, Personality personality_1);
+    void exercise(Arms leftArm, Legs leftLeg);
     int makeFriends(Personality personality_1, Health health, Skin skin);
     void getAngry(Personality personality_1);
 };
 
+void Human::exercise(Arms leftArm, Legs leftLeg)
+{
+    leftArm.moveObject(5, 'l', 20.0f, 5.0f, "Good", 0.0f);
+    leftLeg.kick(20.0f, 90.0f, "Good");
+}
 
+int Human::makeFriends(Personality personality_1, Health health, Skin skin)
+{
+	int numberOfFriends = 0;
+    if (personality_1.personalityType == "INFJ")
+    {
+		numberOfFriends += 1;
+    }
+    if (health.condition == "Healthy")
+    {
+		numberOfFriends += 1;
+    }
+    if (skin.condition == "Good")
+    {
+		numberOfFriends += 1;
+    }
+    return numberOfFriends;
+}
 
-
-
-
+void Human::getAngry(Personality personality_1)
+{
+    if (personality_1.mood.happinessRating < 5)
+    {
+        personality_1.mood.stressed = true;
+    }
+}
 
 
 int main()
