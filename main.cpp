@@ -153,30 +153,30 @@ struct FireAlarmSystem
 {
     std::string smokeDetector = "Siemens";
     std::string speaker = "There's a fire";
-    int phoneLine = 1;
+    int serialNumber = 1;
     std::string camera = "Canon";
     double smokeLevel = 0.0;
-    bool detectFire(std::string smokeDetector, double memory);
-    void soundAlarm(std::string speaker);
-    void alertFireDepartment(int phoneLine, std::string camera);
+    bool detectFire();
+    void soundAlarm(std::string announcement);
+    void alertFireDepartment(int phoneLine);
 };
 
-bool FireAlarmSystem::detectFire(std::string smokeDetector, double smokeLevel)
+bool FireAlarmSystem::detectFire()
 {
     return smokeDetector == "Siemens" && smokeLevel > 50.0;
 }
 
-void FireAlarmSystem::soundAlarm(std::string speaker)
+void FireAlarmSystem::soundAlarm(std::string announcement)
 {
-    if (detectFire(smokeDetector, smokeLevel))
+    if (detectFire())
     {
-        std::cout << speaker << std::endl;
+        std::cout << announcement << std::endl;
     }
 }
 
-void FireAlarmSystem::alertFireDepartment(int phoneLine, std::string camera)
+void FireAlarmSystem::alertFireDepartment(int phoneLine)
 {
-    if (detectFire(smokeDetector, smokeLevel) && phoneLine > 0 && camera == "Canon")
+    if (detectFire() && phoneLine > 0 && camera == "Canon")
     {
         std::cout << "Alerting fire department." << std::endl;
 		// pretend to send camera footage and call fire department eg. callFireDept(phoneLine); sendFootage(camera, phoneLine);
@@ -186,7 +186,7 @@ void FireAlarmSystem::alertFireDepartment(int phoneLine, std::string camera)
 struct Keyboard
 {
     int numberOfKeys = 88;
-    int volume = 10;
+    int volume = 100;
     std::string mode = "Acoustic";
     double lcdScreen = 10.0;
     bool pedal = false;
@@ -197,27 +197,27 @@ struct Keyboard
         float frequency;
         bool isBlackKey;
         float tuning;
-        void playKey(char name, bool isPressed, float frequency, float tuning);
-        void stopKey(char name, bool isPressed);
-        void tuneKey(float tuning);
+        void playKey(int time);
+        void stopKey();
+        void tuneKey(float newTuning);
     };
-    void playSound(Key key_1, int volume, std::string mode, bool pedal);
-    void changeMode(std::string mode);
-    void displayMode(std::string mode, double lcdScreen);
+    void playSound(Key key_1);
+    void changeMode(std::string newMode);
+    void displayMode();
 
-    Key key_1;
+    Key key_C;
 };
 
-void Keyboard::Key::playKey(char name, bool isPressed, float frequency, float tuning)
+void Keyboard::Key::playKey(int time)
 {
     if (!isPressed)
     {
         isPressed = true;
-        std::cout << "Playing key: " << name << " with frequency: " << frequency + tuning << " Hz" << std::endl;
+        std::cout << "Playing key: " << name << " with frequency: " << frequency + tuning << " Hz for" << time << "seconds" << std::endl;
     }
 }
 
-void Keyboard::Key::stopKey(char name, bool isPressed)
+void Keyboard::Key::stopKey()
 {
     if (isPressed)
     {
@@ -226,32 +226,31 @@ void Keyboard::Key::stopKey(char name, bool isPressed)
     }
 }
 
-void Keyboard::Key::tuneKey(float tuning)
+void Keyboard::Key::tuneKey(float newTuning)
 {
-	tuning += tuning;
+	tuning += newTuning;
 }
 
-void Keyboard::playSound(Key key_1, int volume, std::string mode, bool pedal)
+void Keyboard::playSound(Key key_1)
 {
     if (mode == "Acoustic" && pedal)
     {
-		key_1.playKey(key_1.name, key_1.isPressed, key_1.frequency, key_1.tuning);
+		key_1.playKey(5);
     }
 	else if (mode == "Acoustic" && !pedal)
     {
-		key_1.playKey(key_1.name, key_1.isPressed, key_1.frequency, key_1.tuning);
-		key_1.stopKey(key_1.name, key_1.isPressed);
+		key_1.playKey(2);
+		key_1.stopKey();
     }
 }
 
-void Keyboard::changeMode(std::string mode)
+void Keyboard::changeMode(std::string newMode)
 {
-	mode = mode;
+	mode = newMode;
 }
 
-void Keyboard::displayMode(std::string mode, double lcdScreen)
+void Keyboard::displayMode()
 {
-	//sending to console as no implementation for lcd screen
     std::cout << "Current mode: " << mode << " displayed on LCD screen size: " << lcdScreen << " inches" << std::endl;
 }
 
@@ -263,29 +262,33 @@ struct Arms
     float reach = 10.0f;
     std::string condition = "Good";
     float position;
-    bool grabObject(int numberOfFingers, char side, float strength, float reach, std::string condition);
-    void moveObject(int numberOfFingers, char side, float strength, float reach, std::string condition, float position);
-    void punch(float position, float strength, std::string condition);
+    bool grabObject(bool objectPresent, float objectWeight);
+    void moveObject(float position);
+    void punch(float newPosition);
 };
 
-bool Arms::grabObject(int numberOfFingers, char side, float strength, float reach, std::string condition)
+bool Arms::grabObject(bool objectPresent, float objectWeight)
 {
-    return condition == "Good" && numberOfFingers == 5 && strength > 5.0f && reach > 5.0f;
+    if (!objectPresent || objectWeight < strength)
+    {
+        return condition == "Good" && numberOfFingers == 5 && strength > 5.0f && reach > 5.0f;
+	}
+	return false;
 }
 
-void Arms::moveObject(int numberOfFingers, char side, float strength, float reach, std::string condition, float position)
+void Arms::moveObject(float nextPosition)
 {
-    if (grabObject(numberOfFingers, side, strength, reach, condition))
+    if (grabObject(true, 5.0))
     {
-		position += position;
+		position += nextPosition;
     }
 }
 
-void Arms::punch(float position, float strength, std::string condition)
+void Arms::punch(float newPosition)
 {
     if (condition == "Good" && strength > 5.0f)
     {
-        position += position;
+        position += newPosition;
     }
 }
 
@@ -293,35 +296,37 @@ struct Legs
 {
     int numberOfToes = 5;
     char side = 'l';
-    int strength = 10;
+    float strength = 10;
     float kneeJointRange = 90.0f;
+	int juggles = 0;
     std::string condition = "Injured";
-    void kick(int strength, float kneeJointRange, std::string condition);
-    void juggleABall(char side, std::string condition);
-    float jump(int strength, float kneeJointRange, std::string condition);
+    void kick(float newPosition);
+    void juggleABall();
+    float jump(float strengthUsed);
 };
 
-void Legs::kick(int strength, float kneeJointRange, std::string condition)
+void Legs::kick(float newPosition)
 {
-    if (condition == "Good" && strength > 5)
+    if (condition == "Good" && strength > 5.0f)
     {
-        kneeJointRange += kneeJointRange;
+        kneeJointRange += newPosition;
     }
 }
 
-void Legs::juggleABall(char side, std::string condition)
+void Legs::juggleABall()
 {
     if (condition == "Good")
     {
         std::cout << "Juggling a ball with " << side << " leg." << std::endl;
+		juggles += 1;
     }
 }
 
-float Legs::jump(int strength, float kneeJointRange, std::string condition)
+float Legs::jump(float strengthUsed)
 {
-    if (condition == "Good" && strength > 5)
+    if (condition == "Good" && strengthUsed > 5.0f && strengthUsed < strength)
     {
-        return kneeJointRange;
+        return kneeJointRange * strengthUsed;
     }
     return 0.0f;
 }
@@ -333,12 +338,12 @@ struct Skin
     double wrinkles = 10.0;
     int age = 30;
     std::string condition = "Burnt";
-    void tear(float thickness, int age, std::string condition);
-    void burn(float thickness, int age, std::string condition);
-    float stretch(float thickness, int age, std::string condition);
+    void tear();
+    void burn();
+    float stretch(float amount);
 };
 
-void Skin::tear(float thickness, int age, std::string condition)
+void Skin::tear()
 {
     if (condition == "Good" && thickness < 0.5f && age < 10)
     {
@@ -346,7 +351,7 @@ void Skin::tear(float thickness, int age, std::string condition)
     }
 }
 
-void Skin::burn(float thickness, int age, std::string condition)
+void Skin::burn()
 {
     if (condition == "Good" && thickness < 2.0f && age < 30)
     {
@@ -354,11 +359,11 @@ void Skin::burn(float thickness, int age, std::string condition)
     }
 }
 
-float Skin::stretch(float thickness, int age, std::string condition)
+float Skin::stretch(float amount)
 {
     if (condition == "Good" && thickness < 1.5f && age < 20)
     {
-        return thickness * 1.1f;
+        return thickness * amount;
     }
     return thickness;
 }
@@ -495,38 +500,30 @@ struct Human
     Skin skin;
     Health health;
     Personality personality_1;
-    void exercise(Arms leftArm, Legs leftLeg);
-    int makeFriends(Personality personality_1, Health health, Skin skin);
-    void getAngry(Personality personality_1);
+    void exercise(std::string intensity);
+    int makeFriends(int attempts);
+    void getAngry(int angerThreshhold);
 };
 
-void Human::exercise(Arms leftArm, Legs leftLeg)
+void Human::exercise(std::string intensity)
 {
-    leftArm.moveObject(5, 'l', 20.0f, 5.0f, "Good", 0.0f);
-    leftLeg.kick(20.0f, 90.0f, "Good");
+	float position = (intensity == "High") ? 10.0f : 5.0f;
+    leftArm.moveObject(position);
+    leftLeg.kick(position);
 }
 
-int Human::makeFriends(Personality personality_1, Health health, Skin skin)
+int Human::makeFriends(int attempts)
 {
 	int numberOfFriends = 0;
-    if (personality_1.personalityType == "INFJ")
-    {
-		numberOfFriends += 1;
-    }
-    if (health.condition == "Healthy")
-    {
-		numberOfFriends += 1;
-    }
-    if (skin.condition == "Good")
-    {
-		numberOfFriends += 1;
-    }
-    return numberOfFriends;
+	numberOfFriends += (personality_1.personalityType == "INFJ") ? 1 : 0;
+	numberOfFriends += (health.condition == "Healthy") ? 1 : 0;
+	numberOfFriends += (skin.condition == "Good") ? 1 : 0;
+    return numberOfFriends * attempts;
 }
 
-void Human::getAngry(Personality personality_1)
+void Human::getAngry(int angerThreshhold)
 {
-    if (personality_1.mood.happinessRating < 5)
+    if (personality_1.mood.happinessRating < angerThreshhold)
     {
         personality_1.mood.stressed = true;
     }
