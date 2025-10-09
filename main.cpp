@@ -14,9 +14,9 @@ Create a branch named Part2
 
 struct Foot
 {
-    float size;
+    int footSize;
     void stepForward();
-    float stepSize(float size, int speed);//speed is int as howFast in Person is int
+    int stepSize(int size, int speed);//speed is int as howFast in Person is int
 };
 
 void Foot::stepForward()
@@ -24,7 +24,7 @@ void Foot::stepForward()
     
 }
 
-float Foot::stepSize(float size, int speed)//speed is int as howFast in Person is int
+int Foot::stepSize(int size, int speed)//speed is int as howFast in Person is int
 {
     return size * speed;
 }
@@ -36,9 +36,7 @@ struct Person
 	float hairLength;
     float GPA;
 	unsigned int SATScore;
-	int howFast;
-	bool startWithLeftFoot;
-	float dist = 0.0f;
+	int dist = 0;
     Foot leftFoot;
     Foot rightFoot;
 	void run(int howFast, bool startWithLeftFoot);
@@ -56,7 +54,7 @@ void Person::run(int howFast, bool startWithLeftFoot)
         rightFoot.stepForward();
         leftFoot.stepForward();
 	}
-	dist += leftFoot.stepSize(leftFoot.size, howFast) + rightFoot.stepSize(rightFoot.size, howFast);
+	dist += leftFoot.stepSize(leftFoot.footSize, howFast) + rightFoot.stepSize(rightFoot.footSize, howFast);
 }
 
  /*
@@ -87,13 +85,13 @@ struct Camera
     float shutterSpeed = 100.0f;
     bool captureButton = false;
 	bool flashEnabled = false;
-	int videoLength = 10;
-    double takePicture(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton);
-    double takeVideo(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton, int videoLength);
+	float videoLength = 10.0f;
+    float takePicture(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton);
+    float takeVideo(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton, float videoLength);
     void flash();
 };
 
-double Camera::takePicture(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton)
+float Camera::takePicture(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton)
 {
     if (captureButton && film == "Polaroid" && lens == "Canon")
     {
@@ -102,12 +100,13 @@ double Camera::takePicture(std::string lens, std::string film, float zoom, float
     return 0.0;
 }
 
-double Camera::takeVideo(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton, int videoLength)
+float Camera::takeVideo(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton, float videoLength)
 {
     if (captureButton && film == "Polaroid" && lens == "Canon")
     {
 		return videoLength * zoom * shutterSpeed;
     }
+	return 0.0;
 }
 
 void Camera::flash()
@@ -160,7 +159,7 @@ struct FireAlarmSystem
     double smokeLevel = 0.0;
     bool detectFire(std::string smokeDetector, double memory);
     void soundAlarm(std::string speaker);
-    void alertFireDepartment(int phoneLine, std::string camera, double memory);
+    void alertFireDepartment(int phoneLine, std::string camera);
 };
 
 bool FireAlarmSystem::detectFire(std::string smokeDetector, double smokeLevel)
@@ -176,7 +175,7 @@ void FireAlarmSystem::soundAlarm(std::string speaker)
     }
 }
 
-void FireAlarmSystem::alertFireDepartment(int phoneLine, std::string camera, double memory)
+void FireAlarmSystem::alertFireDepartment(int phoneLine, std::string camera)
 {
     if (detectFire(smokeDetector, smokeLevel) && phoneLine > 0 && camera == "Canon")
     {
@@ -305,7 +304,7 @@ struct Legs
 
 void Legs::kick(int strength, float kneeJointRange, std::string condition)
 {
-    if (condition == "Good" && strength > 5.0f)
+    if (condition == "Good" && strength > 5)
     {
         kneeJointRange += kneeJointRange;
     }
@@ -323,7 +322,7 @@ float Legs::jump(int strength, float kneeJointRange, std::string condition)
 {
     if (condition == "Good" && strength > 5)
     {
-        return kneeJointRange * strength / 10.0f;
+        return kneeJointRange;
     }
     return 0.0f;
 }
@@ -420,7 +419,7 @@ struct Personality
         std::string environment;
         float probabilityOfChangingMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment);
         int timeToChangeMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment);
-		void improveMood(int happinessRating, int energyLevel, std::string environment);
+		void improveMood();
     };
     bool goToWork(std::string personalityType, int interactionsPerDay);
     bool learnSkill(float iq, std::string personalityType);
@@ -460,7 +459,7 @@ int Personality::Mood::timeToChangeMood(int happinessRating, bool stressed, int 
     return time;
 }
 
-void Personality::Mood::improveMood(int happinessRating, int energyLevel, std::string environment)
+void Personality::Mood::improveMood()
 {
     happinessRating += 10;
 	stressed = false;
