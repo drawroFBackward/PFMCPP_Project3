@@ -21,8 +21,7 @@ struct Foot
 
 void Foot::stepForward()
 {
-    (void)this;
-	// not quite sure what to put here
+    
 }
 
 float Foot::stepSize(float size, int speed)//speed is int as howFast in Person is int
@@ -88,8 +87,9 @@ struct Camera
     float shutterSpeed = 100.0f;
     bool captureButton = false;
 	bool flashEnabled = false;
+	int videoLength = 10;
     double takePicture(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton);
-    double takeVideo(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton);
+    double takeVideo(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton, int videoLength);
     void flash();
 };
 
@@ -102,17 +102,12 @@ double Camera::takePicture(std::string lens, std::string film, float zoom, float
     return 0.0;
 }
 
-double Camera::takeVideo(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton)
+double Camera::takeVideo(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton, int videoLength)
 {
-	double video = 0.0;
     if (captureButton && film == "Polaroid" && lens == "Canon")
     {
-		for (int i = 0; i < 10; ++i)
-        {
-			video += zoom * shutterSpeed;
-        }
+		return videoLength * zoom * shutterSpeed;
     }
-    return video;
 }
 
 void Camera::flash()
@@ -125,7 +120,7 @@ struct CoffeeMaker
     int amountOfWater = 100;
     int amountOfCoffeeBeanX = 10;
     int amountOfCoffeeBeanY = 10;
-	float coffeeAmount = 0.0f;
+	int coffeeAmount = 0;
     std::string interface = "Touchscreen";
     int timer = 10;
     void makeCoffee(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY, int timer);
@@ -135,10 +130,7 @@ struct CoffeeMaker
 
 void CoffeeMaker::makeCoffee(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY, int timer)
 {
-    for (int i = 0; i < timer; ++i)
-    {
-            coffeeAmount += (amountOfWater / 10.0f) + (amountOfCoffeeBeanX + amountOfCoffeeBeanY) / 20.0f;
-    }
+    coffeeAmount += ((amountOfWater / 10) + (amountOfCoffeeBeanX + amountOfCoffeeBeanY) / 20) * timer;   
 }
 
 void CoffeeMaker::receiveCoffeeRequest(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY)
@@ -173,11 +165,7 @@ struct FireAlarmSystem
 
 bool FireAlarmSystem::detectFire(std::string smokeDetector, double smokeLevel)
 {
-    if (smokeDetector == "Siemens" && smokeLevel > 50.0)
-    {
-        return true;
-    }
-    return false;
+    return smokeDetector == "Siemens" && smokeLevel > 50.0;
 }
 
 void FireAlarmSystem::soundAlarm(std::string speaker)
@@ -249,10 +237,7 @@ void Keyboard::playSound(Key key_1, int volume, std::string mode, bool pedal)
 {
     if (mode == "Acoustic" && pedal)
     {
-        for (int i = 0; i < volume; ++i)
-        {
-			key_1.playKey(key_1.name, key_1.isPressed, key_1.frequency, key_1.tuning);
-		}
+		key_1.playKey(key_1.name, key_1.isPressed, key_1.frequency, key_1.tuning);
     }
 	else if (mode == "Acoustic" && !pedal)
     {
@@ -287,11 +272,7 @@ struct Arms
 
 bool Arms::grabObject(int numberOfFingers, char side, float strength, float reach, std::string condition)
 {
-    if (condition == "Good" && numberOfFingers == 5 && strength > 5.0f && reach > 5.0f)
-    {
-        return true;
-    }
-    return false;
+    return condition == "Good" && numberOfFingers == 5 && strength > 5.0f && reach > 5.0f;
 }
 
 void Arms::moveObject(int numberOfFingers, char side, float strength, float reach, std::string condition, float position)
@@ -451,26 +432,11 @@ struct Personality
 float Personality::Mood::probabilityOfChangingMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment)
 {
     float probability = 0.0f;
-    if (stressed)
-    {
-        probability += 20.0f;
-    }
-    if (happinessRating < 5)
-    {
-        probability += 30.0f;
-    }
-    if (energyLevel < 5)
-    {
-        probability += 25.0f;
-    }
-    if (age < 18)
-    {
-        probability += 15.0f;
-    }
-    if (environment == "Noisy")
-    {
-        probability += 10.0f;
-    }
+	probability += stressed ? 20.0f : 0.0f;
+	probability += (happinessRating < 5) ? 30.0f : 0.0f;
+	probability += (energyLevel < 5) ? 25.0f : 0.0f;
+	probability += (age < 18) ? 15.0f : 0.0f;
+	probability += (environment == "Noisy") ? 10.0f : 0.0f;
     return probability;
 }
 
@@ -504,20 +470,12 @@ void Personality::Mood::improveMood(int happinessRating, int energyLevel, std::s
 
 bool Personality::goToWork(std::string personalityType, int interactionsPerDay)
 {
-    if (personalityType == "INFJ" && interactionsPerDay < 5)
-    {
-        return true;
-    }
-    return false;
+    return personalityType == "INFJ" && interactionsPerDay < 5;
 }
 
 bool Personality::learnSkill(float iq, std::string personalityType)
 {
-    if (iq > 100.0f && personalityType == "INFJ")
-    {
-        return true;
-    }
-    return false;
+    return iq > 100.0f && personalityType == "INFJ";
 }
 
 Personality::Mood Personality::newMood(std::string personalityType, int interactionsPerDay, bool isIntrovert, Personality::Mood mood)
