@@ -81,17 +81,16 @@ struct Camera
 {
     std::string lens = "Canon";
     std::string film = "Polaroid";
-    float zoom = 10.0f;
-    float shutterSpeed = 100.0f;
+    float zoomCapacity = 10.0f;
+    float cameraSize = 100.0f;
     bool captureButton = false;
 	bool flashEnabled = false;
-	float videoLength = 10.0f;
-    float takePicture(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton);
-    float takeVideo(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton, float videoLength);
+    float takePicture(float zoom, float shutterSpeed);
+    float takeVideo(float zoom, float shutterSpeed, float videoLength);
     void flash();
 };
 
-float Camera::takePicture(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton)
+float Camera::takePicture(float zoom, float shutterSpeed)
 {
     if (captureButton && film == "Polaroid" && lens == "Canon")
     {
@@ -100,7 +99,7 @@ float Camera::takePicture(std::string lens, std::string film, float zoom, float 
     return 0.0;
 }
 
-float Camera::takeVideo(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton, float videoLength)
+float Camera::takeVideo(float zoom, float shutterSpeed, float videoLength)
 {
     if (captureButton && film == "Polaroid" && lens == "Canon")
     {
@@ -116,18 +115,18 @@ void Camera::flash()
 
 struct CoffeeMaker
 {
-    int amountOfWater = 100;
-    int amountOfCoffeeBeanX = 10;
-    int amountOfCoffeeBeanY = 10;
+    int water = 100;
+    int coffeeBeanX = 10;
+    int coffeeBeanY = 10;
 	int coffeeAmount = 0;
     std::string interface = "Touchscreen";
     int timer = 10;
-    void makeCoffee(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY, int timer);
+    void makeCoffee(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY);
     void receiveCoffeeRequest(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY);
     void requestForRefill();
 };
 
-void CoffeeMaker::makeCoffee(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY, int timer)
+void CoffeeMaker::makeCoffee(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY)
 {
     coffeeAmount += ((amountOfWater / 10) + (amountOfCoffeeBeanX + amountOfCoffeeBeanY) / 20) * timer;   
 }
@@ -137,7 +136,7 @@ void CoffeeMaker::receiveCoffeeRequest(int amountOfWater, int amountOfCoffeeBean
     if (amountOfWater > 0 && amountOfCoffeeBeanX > 0 && amountOfCoffeeBeanY > 0)
     {
         std::cout << "Coffee request received." << std::endl;
-		makeCoffee(amountOfWater, amountOfCoffeeBeanX, amountOfCoffeeBeanY, timer);
+		makeCoffee(amountOfWater, amountOfCoffeeBeanX, amountOfCoffeeBeanY);
     }
     else
     {
