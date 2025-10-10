@@ -375,34 +375,33 @@ struct Health
     float height = 180.0f;
     int sleepTimeInHours = 8;
     std::string condition = "Sick";
-    std::string changeCondition(int sleepTimeInHours, float weight, float height);
-    float gainWeight(float weight, int sleepTimeInHours, std::string condition);
-    float increaseHeight(float height, int sleepTimeInHours, std::string condition);
+    void changeCondition(std::string newCondition);
+    float gainWeight(float weightMultiplier);
+    float increaseHeight(float heightMultiplier);
 };
 
-std::string Health::changeCondition(int sleepTimeInHours, float weight, float height)
+void Health::changeCondition(std::string newCondition)
 {
     if (sleepTimeInHours >= 8 && weight < 150.0f && height > 150.0f)
     {
-        condition = "Healthy";
+        condition = newCondition;
     }
-    return condition;
 }
 
-float Health::gainWeight(float weight, int sleepTimeInHours, std::string condition)
+float Health::gainWeight(float weightMultiplier)
 {
     if (condition == "Healthy" && sleepTimeInHours < 6)
     {
-        weight = weight * 1.1f;
+        weight = weight * weightMultiplier;
     }
     return weight;
 }
 
-float Health::increaseHeight(float height, int sleepTimeInHours, std::string condition)
+float Health::increaseHeight(float heightMultiplier)
 {
     if (condition == "Healthy" && sleepTimeInHours >= 8)
     {
-        height = height * 1.1f;
+        height = height * heightMultiplier;
     }
     return height;
 }
@@ -421,18 +420,18 @@ struct Personality
         int energyLevel;
         int age;
         std::string environment;
-        float probabilityOfChangingMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment);
-        int timeToChangeMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment);
+        float probabilityOfChangingMood();
+        int timeToChangeMood();
 		void improveMood();
     };
-    bool goToWork(std::string personalityType, int interactionsPerDay);
-    bool learnSkill(float iq, std::string personalityType);
-    Personality::Mood newMood(std::string personalityType, int interactionsPerDay, bool isIntrovert, Mood Mood);
+    bool goToWork(std::string dayOfTheWeek);
+    bool learnSkill();
+    void resetMoodParams();
 
     Mood mood;
 };
 
-float Personality::Mood::probabilityOfChangingMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment)
+float Personality::Mood::probabilityOfChangingMood()
 {
     float probability = 0.0f;
 	probability += stressed ? 20.0f : 0.0f;
@@ -443,23 +442,13 @@ float Personality::Mood::probabilityOfChangingMood(int happinessRating, bool str
     return probability;
 }
 
-int Personality::Mood::timeToChangeMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment)
+int Personality::Mood::timeToChangeMood()
 {
     int time = 0;
     time += happinessRating * 2;
-    if (!stressed)
-    {
-        time += 10;
-    }
+	time += stressed ? 0 : 10;
     time += (10 - energyLevel) * 2;
-    if (age < 18)
-    {
-        time += 5;
-    }
-    if (environment == "Noisy")
-    {
-        time += 5;
-    }
+	time += (age < 18) ? 0 : 5;
     return time;
 }
 
@@ -471,17 +460,17 @@ void Personality::Mood::improveMood()
     environment =  "Calm";
 }
 
-bool Personality::goToWork(std::string personalityType, int interactionsPerDay)
+bool Personality::goToWork(std::string dayOfTheWeek)
 {
-    return personalityType == "INFJ" && interactionsPerDay < 5;
+    return !(dayOfTheWeek == "Saturday" || dayOfTheWeek == "Sunday");
 }
 
-bool Personality::learnSkill(float iq, std::string personalityType)
+bool Personality::learnSkill()
 {
     return iq > 100.0f && personalityType == "INFJ";
 }
 
-Personality::Mood Personality::newMood(std::string personalityType, int interactionsPerDay, bool isIntrovert, Personality::Mood mood)
+void Personality::resetMoodParams()
 {
     if (personalityType == "INFJ" && interactionsPerDay < 5 && isIntrovert)
     {
@@ -490,7 +479,6 @@ Personality::Mood Personality::newMood(std::string personalityType, int interact
         mood.energyLevel = 10;
         mood.environment = "Calm";
     }
-    return mood;
 }
 
 struct Human
