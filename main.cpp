@@ -4,113 +4,58 @@
  Implementations tasks
  
 Create a branch named Part2
-
- tasks
- 0) delete all of the plain english pseudo-code you added in Part1.
-   don't forget to remove the blank lines left behind after you remove your comments
-   - you should be left with only your UDTs.
-*/
-// example:
-// if you had something like this at the end of Part1e:
-/*
-Thing: Car Wash   
-    5 properties:
-        - number of vacuum cleaners
-        - number of eco-friendly cleaning supplies
-        - stores the amount of water used per week.
-        - stores amount of profit made per week
-        - number of cars serviced per day
-    3 things it can do:
-        - wash and wax car
-        - charge customer
-        - detail the car interior
- */
-
-#include <iostream>
-#include <string>
-namespace Part1eVersion 
-{
-struct CarWash        
-{
-    //number of vacuum cleaners                     
-    int numVacuumCleaners = 3; 
-    //number of eco-friendly cleaning supplies      
-    int numEcoFriendlyCleaningSupplies = 20;     
-    //stores the amount of water used per week.     
-    float waterUsedPerWeek = 200.f;            
-    //stores amount of profit made per week         
-    float profitPerWeek = 495.95f;               
-    //number of cars serviced per day               
-    int numberOfCarsServiced = 10;               
-    
-    struct Car  
-    {
-        bool isAPickupTruck = false;
-        float gasMileage = 26.2f;        
-        int year = 1985;
-        std::string manufacturer = "Toyota";
-        std::string model = "Corolla";
-
-        void fillTank(float costPerGallon, double fuelAmountInGallons = 2.0, bool requiresDiesel = false);  
-        void breakDown(std::string failureType, bool requiresTow = false);
-        int getMilesTraveledAnnually(bool includeUberLyftTrips);
-    };
-
-    //wash and wax car
-    void washAndWaxCar( Car car ); 
-    //charge customer
-    float chargeCustomer(float discountPercentage);
-    //detail the car interior
-    void detailInterior( Car car );
-    
-    Car carBeingServiced;  
-};
-}
-
-//this is what I want to see after the code is cleaned up: 
-namespace Part2Version
-{
-struct CarWash        
-{
-    int numVacuumCleaners = 3; 
-    int numEcoFriendlyCleaningSupplies = 20;     
-    float waterUsedPerWeek = 200.f;            
-    float profitPerWeek = 495.95f;               
-    int numberOfCarsServiced = 10;               
-    
-    struct Car  
-    {
-        bool isAPickupTruck = false;
-        float gasMileage = 26.2f;        
-        int year = 1985;
-        std::string manufacturer = "Toyota";
-        std::string model = "Corolla";
-
-        void fillTank(double fuelAmountInGallons = 2.0);  
-        void breakDown(std::string failureType, bool requiresTow = false);
-        int getMilesTraveledAnnually(bool includeUberLyftTrips);
-    };
-
-    void washAndWaxCar( Car car ); 
-    float chargeCustomer(float discountPercentage);
-    void detailInterior( Car car );
-    
-    Car carBeingServiced;  
-};
-}
-  /*
-    The above snippet is just an example showing you how to clean up your code.  
-    Do not put your cleaned up code into a namespace like I have done here.
-
  1) write the definition for the Type that leftFoot and rightFoot are instantiations of.
     don't forget to define and implement the member functions 'stepForward()' and 'stepSize()'
     you should be able to deduce the return type of those functions based on their usage in Person::run()
     You'll need to insert the Person struct from the video in the space below.
  */
 
+#include <iostream>
 
+struct Foot
+{
+    int footSize;
+    void stepForward();
+    int stepSize(int size, int speed);//speed is int as howFast in Person is int
+};
 
+void Foot::stepForward()
+{
+    
+}
 
+int Foot::stepSize(int size, int speed)//speed is int as howFast in Person is int
+{
+    return size * speed;
+}
+
+struct Person
+{
+    int age;
+    int height;
+	float hairLength;
+    float GPA;
+	unsigned int SATScore;
+	int dist = 0;
+    Foot leftFoot;
+    Foot rightFoot;
+	void run(int howFast, bool startWithLeftFoot);
+};
+
+void Person::run(int howFast, bool startWithLeftFoot)
+{
+    if(startWithLeftFoot)
+    {
+        leftFoot.stepForward();
+        rightFoot.stepForward();
+    }
+    else
+    {
+        rightFoot.stepForward();
+        leftFoot.stepForward();
+	}
+	dist += leftFoot.stepSize(leftFoot.footSize, howFast) + rightFoot.stepSize(rightFoot.footSize, howFast);
+}
 
  /*
  2) provide implementations for the member functions you declared in your 10 user-defined types from the previous video outside of your UDT definitions.
@@ -134,261 +79,443 @@ struct CarWash
 
 struct Camera
 {
-    //5 properties:
-    //    - lens
     std::string lens = "Canon";
-    //    - film
     std::string film = "Polaroid";
-    //    - zoom
-    float zoom = 10.0f;
-    //    - shutter speed
-    float shutterSpeed = 100.0f;
-    //    - capture button
+    float zoomCapacity = 10.0f;
+    float cameraSize = 100.0f;
     bool captureButton = false;
-    //3 things it can do:
-    //    - take picture
-    double takePicture(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton);//returns picture data (i know images are 2x2 arrays of pixels, but i'm gonna ignore that and pretend it's a double))
-    //    - take video
-    double takeVideo(std::string lens, std::string film, float zoom, float shutterSpeed, bool captureButton);//same as above but for video
-    //    - flash
-    void flash();//turns on flash (which in hindsight I cd have put down as a bool property)
+	bool flashEnabled = false;
+    float takePicture(float zoom, float shutterSpeed);
+    float takeVideo(float zoom, float shutterSpeed, float videoLength);
+    void flash();
 };
+
+float Camera::takePicture(float zoom, float shutterSpeed)
+{
+    if (captureButton && film == "Polaroid" && lens == "Canon")
+    {
+        return zoom * shutterSpeed;
+	}
+    return 0.0;
+}
+
+float Camera::takeVideo(float zoom, float shutterSpeed, float videoLength)
+{
+    if (captureButton && film == "Polaroid" && lens == "Canon")
+    {
+		return videoLength * zoom * shutterSpeed;
+    }
+	return 0.0;
+}
+
+void Camera::flash()
+{
+	flashEnabled = true;
+}
 
 struct CoffeeMaker
 {
-    //5 properties:
-    //    - Amount of water
-    int amountOfWater = 100;
-    //    - Amount of coffee bean X
-    int amountOfCoffeeBeanX = 10;
-    //    - Amount of coffee bean Y
-    int amountOfCoffeeBeanY = 10;
-    //    - Interface
+    int water = 100;
+    int coffeeBeanX = 10;
+    int coffeeBeanY = 10;
+	int coffeeAmount = 0;
     std::string interface = "Touchscreen";
-    //    - Timer
     int timer = 10;
-    //3 things it can do:
-    //    - Make coffee
-    void makeCoffee(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY, std::string interface, int timer);
-    //    - Receive coffee request
+    void makeCoffee(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY);
     void receiveCoffeeRequest(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY);
-    //    - Decline coffee request
-    std::string declineCoffeeRequest(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY);//returns reason for declining
+    void requestForRefill();
 };
+
+void CoffeeMaker::makeCoffee(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY)
+{
+    coffeeAmount += ((amountOfWater / 10) + (amountOfCoffeeBeanX + amountOfCoffeeBeanY) / 20) * timer;   
+}
+
+void CoffeeMaker::receiveCoffeeRequest(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY)
+{
+    if (amountOfWater > 0 && amountOfCoffeeBeanX > 0 && amountOfCoffeeBeanY > 0)
+    {
+        std::cout << "Coffee request received." << std::endl;
+		makeCoffee(amountOfWater, amountOfCoffeeBeanX, amountOfCoffeeBeanY);
+    }
+    else
+    {
+		requestForRefill();
+    }
+}
+
+void CoffeeMaker::requestForRefill()
+{
+	std::cout << "Refill ingredients." << std::endl;
+}
 
 struct FireAlarmSystem
 {
-    //5 properties:
-    //    - Smoke detector
     std::string smokeDetector = "Siemens";
-    //    - Speaker
-    std::string speaker = "Sony";
-    //    - Phone Line
-    int phoneLine = 1;
-    //    - Camera
+    std::string speaker = "There's a fire";
+    int serialNumber = 1;
     std::string camera = "Canon";
-    //    - Memory
-    double memory = 100.0;
-    //3 things it can do:
-    //    - Detect fire
-    bool detectFire(std::string smokeDetector, std::string camera, double memory);//returns true if fire is detected
-    //    - Sound alarm
-    void soundAlarm(std::string speaker);
-    //    - Alert fire department
-    void alertFireDepartment(int phoneLine, std::string camera, double memory);
+    double smokeLevel = 0.0;
+    bool detectFire();
+    void soundAlarm(std::string announcement);
+    void alertFireDepartment(int phoneLine);
 };
+
+bool FireAlarmSystem::detectFire()
+{
+    return smokeDetector == "Siemens" && smokeLevel > 50.0;
+}
+
+void FireAlarmSystem::soundAlarm(std::string announcement)
+{
+    if (detectFire())
+    {
+        std::cout << announcement << std::endl;
+    }
+}
+
+void FireAlarmSystem::alertFireDepartment(int phoneLine)
+{
+    if (detectFire() && phoneLine > 0 && camera == "Canon")
+    {
+        std::cout << "Alerting fire department." << std::endl;
+		// pretend to send camera footage and call fire department eg. callFireDept(phoneLine); sendFootage(camera, phoneLine);
+    }
+}
 
 struct Keyboard
 {
-    //5 properties:
-    //    - Number of keys
     int numberOfKeys = 88;
-    //    - Volume
-    float volume = 10.0f;
-    //    - Mode
+    int volume = 100;
     std::string mode = "Acoustic";
-    //    - LCD screen
     double lcdScreen = 10.0;
-    //    - Pedal
     bool pedal = false;
-    //nested struct
-    struct key FIXME Type names should use CamelCase
+    struct Key
     {
-        //properties
         char name;
         bool isPressed;
         float frequency;
         bool isBlackKey;
         float tuning;
-        //actions
-        void playKey(char name, bool isPressed, float frequency, float tuning);
-        void stopKey(char name, bool isPressed);
-        void tuneKey(char name, float tuning);
+        void playKey(int time);
+        void stopKey();
+        void tuneKey(float newTuning);
     };
-    //3 things it can do:
-    //    - Play sound
-    void playSound(float volume, std::string mode, bool pedal);
-    //    - change mode
-    void changeMode(std::string mode);
-    //    - display mode
-    void displayMode(std::string mode, double lcdScreen);
+    void playSound(Key key_1);
+    void changeMode(std::string newMode);
+    void displayMode();
 
-    key key_1;
+    Key key_C;
 };
+
+void Keyboard::Key::playKey(int time)
+{
+    if (!isPressed)
+    {
+        isPressed = true;
+        std::cout << "Playing key: " << name << " with frequency: " << frequency + tuning << " Hz for" << time << "seconds" << std::endl;
+    }
+}
+
+void Keyboard::Key::stopKey()
+{
+    if (isPressed)
+    {
+        std::cout << "Stopping key: " << name << std::endl;
+		isPressed = false;
+    }
+}
+
+void Keyboard::Key::tuneKey(float newTuning)
+{
+	tuning += newTuning;
+}
+
+void Keyboard::playSound(Key key_1)
+{
+    if (mode == "Acoustic" && pedal)
+    {
+		key_1.playKey(5);
+    }
+	else if (mode == "Acoustic" && !pedal)
+    {
+		key_1.playKey(2);
+		key_1.stopKey();
+    }
+}
+
+void Keyboard::changeMode(std::string newMode)
+{
+	mode = newMode;
+}
+
+void Keyboard::displayMode()
+{
+    std::cout << "Current mode: " << mode << " displayed on LCD screen size: " << lcdScreen << " inches" << std::endl;
+}
 
 struct Arms
 {
-    //5 properties:
-    //    - number of fingers
     int numberOfFingers = 5;
-    //    - side - l or r
     char side = 'l';
-    //    - strength
     float strength = 10.0f;
-    //    - reach
     float reach = 10.0f;
-    //    - condition
     std::string condition = "Good";
-    //3 things it can do:
-    //    - grab object
-    bool grabObject(int numberOfFingers, char side, float strength, float reach, std::string condition);//returns true if object is grabbed
-    //    - move object
-    void moveObject(int numberOfFingers, char side, float strength, float reach, std::string condition);
-    //    - punch
-    void punch(char side, float strength, std::string condition);
+    float position;
+    bool grabObject(bool objectPresent, float objectWeight);
+    void moveObject(float position);
+    void punch(float newPosition);
 };
+
+bool Arms::grabObject(bool objectPresent, float objectWeight)
+{
+    if (!objectPresent || objectWeight < strength)
+    {
+        return condition == "Good" && numberOfFingers == 5 && strength > 5.0f && reach > 5.0f;
+	}
+	return false;
+}
+
+void Arms::moveObject(float nextPosition)
+{
+    if (grabObject(true, 5.0))
+    {
+		position += nextPosition;
+    }
+}
+
+void Arms::punch(float newPosition)
+{
+    if (condition == "Good" && strength > 5.0f)
+    {
+        position += newPosition;
+    }
+}
 
 struct Legs
 {
-    //5 properties:
-    //    - number of toes
     int numberOfToes = 5;
-    //    - side - l or r
     char side = 'l';
-    //    - strength
-    int strength = 10;
-    //    - knee joint range
+    float strength = 10;
     float kneeJointRange = 90.0f;
-    //    - condition
+	int juggles = 0;
     std::string condition = "Injured";
-    //3 things it can do:
-    //    - kick
-    void kick(int numberOfToes, char side, int strength, float kneeJointRange, std::string condition);
-    //    - juggle a ball
-    void juggleABall(char side, std::string condition);
-    //    - jump
-    float jump(char side, int strength, float kneeJointRange, std::string condition);//returns height jumped
+    void kick(float newPosition);
+    void juggleABall();
+    float jump(float strengthUsed);
 };
+
+void Legs::kick(float newPosition)
+{
+    if (condition == "Good" && strength > 5.0f)
+    {
+        kneeJointRange += newPosition;
+    }
+}
+
+void Legs::juggleABall()
+{
+    if (condition == "Good")
+    {
+        std::cout << "Juggling a ball with " << side << " leg." << std::endl;
+		juggles += 1;
+    }
+}
+
+float Legs::jump(float strengthUsed)
+{
+    if (condition == "Good" && strengthUsed > 5.0f && strengthUsed < strength)
+    {
+        return kneeJointRange * strengthUsed;
+    }
+    return 0.0f;
+}
 
 struct Skin
 {
-    //5 properties:
-    //    - color
     std::string color = "Brown";
-    //    - thickness
     float thickness = 1.0f;
-    //    - wrinkles
     double wrinkles = 10.0;
-    //    - age
     int age = 30;
-    //    - condition
     std::string condition = "Burnt";
-    //3 things it can do:
-    //    - break (bleed)
-    void tear(float thickness, int age, std::string condition);
-    //    - burn
-    void burn(float thickness, int age, std::string condition);
-    //    - stretch
-    float stretch(float thickness, int age, std::string condition);//returns amount stretched
+    void tear();
+    void burn();
+    float stretch(float amount);
 };
+
+void Skin::tear()
+{
+    if (condition == "Good" && thickness < 0.5f && age < 10)
+    {
+		condition = "Torn";
+    }
+}
+
+void Skin::burn()
+{
+    if (condition == "Good" && thickness < 2.0f && age < 30)
+    {
+        condition = "Burnt";
+    }
+}
+
+float Skin::stretch(float amount)
+{
+    if (condition == "Good" && thickness < 1.5f && age < 20)
+    {
+        return thickness * amount;
+    }
+    return thickness;
+}
 
 struct Health
 {
-    //5 properties:
-    //    - blood type
     char bloodType = 'A';
-    //    - weight
     float weight = 100.0f;
-    //    - height
     float height = 180.0f;
-    //    - sleep time in hours
     int sleepTimeInHours = 8;
-    //    - condition
     std::string condition = "Sick";
-    //3 things it can do:
-    //    - change condition (eg. fall ill)
-    std::string changeCondition(std::string condition, int sleepTimeInHours, float weight, float height);//returns new condition
-    //    - gain weight
-    float gainWeight(float weight, int sleepTimeInHours, std::string condition);//returns new weight
-    //    - increase height
-    float increaseHeight(float height, int sleepTimeInHours, std::string condition);//returns new height
+    void changeCondition(std::string newCondition);
+    float gainWeight(float weightMultiplier);
+    float increaseHeight(float heightMultiplier);
 };
+
+void Health::changeCondition(std::string newCondition)
+{
+    if (sleepTimeInHours >= 8 && weight < 150.0f && height > 150.0f)
+    {
+        condition = newCondition;
+    }
+}
+
+float Health::gainWeight(float weightMultiplier)
+{
+    if (condition == "Healthy" && sleepTimeInHours < 6)
+    {
+        weight = weight * weightMultiplier;
+    }
+    return weight;
+}
+
+float Health::increaseHeight(float heightMultiplier)
+{
+    if (condition == "Healthy" && sleepTimeInHours >= 8)
+    {
+        height = height * heightMultiplier;
+    }
+    return height;
+}
 
 struct Personality
 {
-    //5 properties:
-    //    - IQ
     float iq = 200.0f;
-    //    - gender
     char gender = 'F';
-    //    - personality type
     std::string personalityType = "INFJ";
-    //    - interactions per day
     int interactionsPerDay = 10;
-    //    - is introvert
     bool isIntrovert = true;
-    // nested struct
-    struct mood FIXME Type names should use CamelCase
+    struct Mood
     {
-        //properties
         int happinessRating;
         bool stressed;
         int energyLevel;
         int age;
         std::string environment;
-        //actions
-        float probabilityOfChangingMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment);//returns probability of changing mood
-        int timeToChangeMood(int happinessRating, bool stressed, int energyLevel, int age, std::string environment);//returns time in minutes to change mood
-
+        float probabilityOfChangingMood();
+        int timeToChangeMood();
+		void improveMood();
     };
-    //3 things it can do:
-    //    - make decisions
-    bool goToWork(std::string personalityType, int interactionsPerDay);//returns true if goes to work
-    //    - learn skills
-    std::string learnSkill(float iq, std::string personalityType);//returns skill learned
-    //    - change mood
-    mood newMood(std::string personalityType, int interactionsPerDay, bool isIntrovert, mood Mood);//returns new mood
+    bool goToWork(std::string dayOfTheWeek);
+    bool learnSkill();
+    void resetMoodParams();
 
-    mood Mood;
+    Mood mood;
 };
+
+float Personality::Mood::probabilityOfChangingMood()
+{
+    float probability = 0.0f;
+	probability += stressed ? 20.0f : 0.0f;
+	probability += (happinessRating < 5) ? 30.0f : 0.0f;
+	probability += (energyLevel < 5) ? 25.0f : 0.0f;
+	probability += (age < 18) ? 15.0f : 0.0f;
+	probability += (environment == "Noisy") ? 10.0f : 0.0f;
+    return probability;
+}
+
+int Personality::Mood::timeToChangeMood()
+{
+    int time = 0;
+    time += happinessRating * 2;
+	time += stressed ? 0 : 10;
+    time += (10 - energyLevel) * 2;
+	time += (age < 18) ? 0 : 5;
+    return time;
+}
+
+void Personality::Mood::improveMood()
+{
+    happinessRating += 10;
+	stressed = false;
+    energyLevel += 10;
+    environment =  "Calm";
+}
+
+bool Personality::goToWork(std::string dayOfTheWeek)
+{
+    return !(dayOfTheWeek == "Saturday" || dayOfTheWeek == "Sunday");
+}
+
+bool Personality::learnSkill()
+{
+    return iq > 100.0f && personalityType == "INFJ";
+}
+
+void Personality::resetMoodParams()
+{
+    if (personalityType == "INFJ" && interactionsPerDay < 5 && isIntrovert)
+    {
+        mood.happinessRating = 10;
+        mood.stressed = false;
+        mood.energyLevel = 10;
+        mood.environment = "Calm";
+    }
+}
 
 struct Human
 {
-    //5 properties:
-    //    - Arms
     Arms leftArm;
-    //    - Legs
     Legs leftLeg;
-    //    - Skin
     Skin skin;
-    //    - Health
     Health health;
-    //    - Personality
     Personality personality_1;
-    //3 things it can do:
-    //    - Excercise
-    void excercise(Arms leftArm, Legs leftLeg, Skin skin, Health health, Personality personality_1);
-    //    - Make friends
-    int makeFriends(Personality personality_1, Health health, Skin skin);//returns number of friends made
-    //    - Get angry
-    void getAngry(Personality personality_1);
+    void exercise(std::string intensity);
+    int makeFriends(int attempts);
+    void getAngry(int angerThreshhold);
 };
 
+void Human::exercise(std::string intensity)
+{
+	float position = (intensity == "High") ? 10.0f : 5.0f;
+    leftArm.moveObject(position);
+    leftLeg.kick(position);
+}
 
+int Human::makeFriends(int attempts)
+{
+	int numberOfFriends = 0;
+	numberOfFriends += (personality_1.personalityType == "INFJ") ? 1 : 0;
+	numberOfFriends += (health.condition == "Healthy") ? 1 : 0;
+	numberOfFriends += (skin.condition == "Good") ? 1 : 0;
+    return numberOfFriends * attempts;
+}
 
-
-
-
+void Human::getAngry(int angerThreshhold)
+{
+    if (personality_1.mood.happinessRating < angerThreshhold)
+    {
+        personality_1.mood.stressed = true;
+    }
+}
 
 
 int main()
