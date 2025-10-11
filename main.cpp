@@ -1,80 +1,76 @@
- /*
- Project 3 - Part 2 / 5
- Video: Chapter 2 Part 6
- Implementations tasks
+/*
+ Project 3 - Part 3 / 5
+ video: Chapter 2 - Part 8
+ Constructors tasks
+
+ Create a branch named Part3
+
+ On this new branch:
+
+ 0) if you opted to not fill in any of your member functions in part2, 
+    fill in ALL of your member functions
+    
+ 1) Add a constructor for each User-Defined-Type.
+    The constructor should be the first declaration in your UDT, before all member variables and member functions.
+    add a std::cout message in the constructor that prints out the name of the class being constructed.  
+    When you run your code, you'll see the order that your objects are created in the program output. 
  
-Create a branch named Part2
- 1) write the definition for the Type that leftFoot and rightFoot are instantiations of.
-    don't forget to define and implement the member functions 'stepForward()' and 'stepSize()'
-    you should be able to deduce the return type of those functions based on their usage in Person::run()
-    You'll need to insert the Person struct from the video in the space below.
+ 2) For each User-Defined-Type:
+        amend some of the member functions to print out something interesting via std::cout
+ 
+ 3) Instantiate 1 or 2 instances of EACH of your user-defined types in the main() function.  
+    You should have at least 12 different variables declared in main(), because you have written 12 different types (including the nested types)
+
+ 4) For each instantiated UDT: 
+        call each of that instance's member functions.
+        You're doing this to show that your code doesn't produce warnings when you call the functions that take arguments.
+ 
+ 5) add some std::cout statements in main() that print out your UDT's member variable values or values returned from your UDT member functions (if they return values)
+ 
+ After you finish defining each type/function:
+ click the [run] button.  Clear up any errors or warnings as best you can.
+ if your code produces a -Wpadded warning, add '-Wno-padded' to the .replit file with the other compiler flags (-Weverything -Wno-missing-prototypes etc etc)
+ 
+ example:
  */
 
 #include <iostream>
-
-struct Foot
+namespace Example 
 {
-    int footSize;
-    void stepForward();
-    int stepSize(int size, int speed);//speed is int as howFast in Person is int
+struct UDT  // my user defined type named 'UDT'
+{
+    int thing = 0; //a member variable
+    UDT();              //1) the constructor
+    void printThing();  //the member function
 };
 
-void Foot::stepForward()
+//the function definitions are outside of the class
+UDT::UDT()
 {
+    std::cout << "UDT being constructed!" << std::endl; //1) 
+}
+
+void UDT::printThing()
+{
+    std::cout << "UDT::printThing() " << thing << std::endl;  //2) printing out something interesting
+}
+
+int main()
+{
+    UDT foo;              //3) instantiating a UDT named 'foo' in main()
+    foo.printThing();     //4) calling a member function of the UDT instance.
     
+    //5) a std::cout statement accessing foo's member variable.
+    //It also demonstrates a 'ternary expression', which is syntactic shorthand for an 'if/else' expression
+    std::cout << "Is foo's member var 'thing' equal to 0? " << (foo.thing == 0 ? "Yes" : "No") << "\n";
+    
+    return 0;
 }
+} //end namespace Example
 
-int Foot::stepSize(int size, int speed)//speed is int as howFast in Person is int
-{
-    return size * speed;
-}
+//insert Example::main() into main() of user's repo.
 
-struct Person
-{
-    int age;
-    int height;
-	float hairLength;
-    float GPA;
-	unsigned int SATScore;
-	int dist = 0;
-    Foot leftFoot;
-    Foot rightFoot;
-	void run(int howFast, bool startWithLeftFoot);
-};
 
-void Person::run(int howFast, bool startWithLeftFoot)
-{
-    if(startWithLeftFoot)
-    {
-        leftFoot.stepForward();
-        rightFoot.stepForward();
-    }
-    else
-    {
-        rightFoot.stepForward();
-        leftFoot.stepForward();
-	}
-	dist += leftFoot.stepSize(leftFoot.footSize, howFast) + rightFoot.stepSize(rightFoot.footSize, howFast);
-}
-
- /*
- 2) provide implementations for the member functions you declared in your 10 user-defined types from the previous video outside of your UDT definitions.
-    If you have 'unused parameter' warnings, you aren't using one of your function parameters in your implementation.
-    Solution: use the parameter in your implementation.
-
-    If you have 'shadows a field of <classname>' warnings, a local variable in the function has the same name as a class member.  
-    This local variable could also be a function parameter with the same name as the class member.
-    Solution: change the local variable's name so it is different from the class member variable's name.
- 
- 3) be sure to write the correct full qualified name for the nested type's member functions.
- 
- 4) After you finish defining each type/function, click the [run] button.  Clear up any errors or warnings as best you can.
- if your code produces a -Wpadded warning, add '-Wno-padded' to the .replit file with the other compiler flags (-Weverything -Wno-missing-prototypes etc etc)
- If your code produces -Wconversion warnings, do NOT use static_cast<> to solve the warnings.  
- Casting has not been covered yet.
- Change your code so that no warnings are produced WITHOUT using casting.
- This usually means you have to use identical types for all variables used in an expression that is producing that conversion warning.
- */
 
 
 struct Camera
@@ -520,5 +516,14 @@ void Human::getAngry(int angerThreshhold)
 
 int main()
 {
+	Example::main();
+
+	/*
+		add your code between here
+		*/
+
+	/*
+		and here
+		*/
     std::cout << "good to go!" << std::endl;
 }
