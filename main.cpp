@@ -217,11 +217,11 @@ struct Keyboard
         void stopKey();
         void tuneKey(float newTuning);
     };
-    void playSound(Key key_1);
+    void playSound(Key key);
     void changeMode(std::string newMode);
     void displayMode();
 
-    Key key_C;
+    Key key_1;
 };
 
 Keyboard::Keyboard()
@@ -257,16 +257,16 @@ void Keyboard::Key::tuneKey(float newTuning)
 	tuning += newTuning;
 }
 
-void Keyboard::playSound(Key key_1)
+void Keyboard::playSound(Key key)
 {
     if (mode == "Acoustic" && pedal)
     {
-		key_1.playKey(5);
+		key.playKey(5);
     }
 	else if (mode == "Acoustic" && !pedal)
     {
-		key_1.playKey(2);
-		key_1.stopKey();
+		key.playKey(2);
+		key.stopKey();
     }
 }
 
@@ -546,8 +546,8 @@ void Personality::resetMoodParams()
 struct Human
 {
 	Human();
-    Arms leftArm;
-    Legs leftLeg;
+    Arms leftArm, rightArm;
+    Legs leftLeg, rightLeg;
     Skin skin;
     Health health;
     Personality personality_1;
@@ -565,7 +565,9 @@ void Human::exercise(std::string intensity)
 {
 	float position = (intensity == "High") ? 10.0f : 5.0f;
     leftArm.moveObject(position);
+	rightArm.moveObject(position);
     leftLeg.kick(position);
+	rightLeg.kick(position);
 }
 
 int Human::makeFriends(int attempts)
@@ -593,7 +595,64 @@ int main()
 	/*
 		add your code between here
 		*/
+	Camera camera1;
 
+	CoffeeMaker coffeeMaker1;
+
+	FireAlarmSystem fireAlarmSystem1;
+
+	Keyboard keyboard1;
+
+	Keyboard::Key keyC;
+
+	keyboard1.key_1 = keyC;
+
+	Arms leftArm;
+
+	Arms rightArm;
+
+	Legs rightLeg;
+
+	Legs leftLeg;
+
+	Skin skin1;
+
+	Health health1;
+
+	Personality personality1;
+
+	Personality::Mood mood1;
+
+    Human human1;
+    // Calling member functions for each instance
+    camera1.takePicture(5.0f, 0.5f);
+	camera1.takeVideo(5.0f, 0.5f, 10.0f);
+    camera1.flash();
+	coffeeMaker1.makeCoffee(50, 5, 5);
+    coffeeMaker1.receiveCoffeeRequest(50, 5, 5);
+	coffeeMaker1.requestForRefill();
+    fireAlarmSystem1.smokeLevel = 60.0;
+    fireAlarmSystem1.soundAlarm("Fire detected!");
+    fireAlarmSystem1.alertFireDepartment(1234567890);
+    keyboard1.playSound(keyA);
+    keyboard1.displayMode();
+    leftArm.grabObject(true, 5.0f);
+    leftArm.moveObject(10.0f);
+    std::cout << "Left arm position: " << leftArm.position << std::endl;
+    rightLeg.juggleABall();
+    float jumpHeight = rightLeg.jump(8.0f);
+    std::cout << "Jump height: " << jumpHeight << std::endl;
+    skin1.burn();
+    std::cout << "Skin condition: " << skin1.condition << std::endl;
+    health1.changeCondition("Healthy");
+    float newWeight = health1.gainWeight(1.1f);
+    std::cout << "New weight: " << newWeight << std::endl;
+    personality1.mood.happinessRating = 4;
+    float moodChangeProb = personality1.mood.probabilityOfChangingMood();
+    std::cout << "Mood change probability: " << moodChangeProb << "%" << std::endl;
+    human1.exercise("High");
+    int friendsMade = human1.makeFriends(3);
+	std::cout << "Friends made: " << friendsMade << std::endl;
 	/*
 		and here
 		*/
