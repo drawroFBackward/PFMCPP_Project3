@@ -21,7 +21,7 @@
  3) Instantiate 1 or 2 instances of EACH of your user-defined types in the main() function.  
     You should have at least 12 different variables declared in main(), because you have written 12 different types (including the nested types)
 
- 4) For each instantiated UDT: 
+ 4) For each instantiated UDT:
         call each of that instance's member functions.
         You're doing this to show that your code doesn't produce warnings when you call the functions that take arguments.
  
@@ -75,6 +75,7 @@ int main()
 
 struct Camera
 {
+	Camera();
     std::string lens = "Canon";
     std::string film = "Polaroid";
     float zoomCapacity = 10.0f;
@@ -85,6 +86,11 @@ struct Camera
     float takeVideo(float zoom, float shutterSpeed, float videoLength);
     void flash();
 };
+
+Camera::Camera()
+{
+    std::cout << "Camera being constructed!" << std::endl;
+}   
 
 float Camera::takePicture(float zoom, float shutterSpeed)
 {
@@ -111,6 +117,7 @@ void Camera::flash()
 
 struct CoffeeMaker
 {
+	CoffeeMaker();
     int water = 100;
     int coffeeBeanX = 10;
     int coffeeBeanY = 10;
@@ -121,6 +128,11 @@ struct CoffeeMaker
     void receiveCoffeeRequest(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY);
     void requestForRefill();
 };
+
+CoffeeMaker::CoffeeMaker()
+{
+    std::cout << "CoffeeMaker being constructed!" << std::endl;
+}
 
 void CoffeeMaker::makeCoffee(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY)
 {
@@ -147,6 +159,7 @@ void CoffeeMaker::requestForRefill()
 
 struct FireAlarmSystem
 {
+	FireAlarmSystem();
     std::string smokeDetector = "Siemens";
     std::string speaker = "There's a fire";
     int serialNumber = 1;
@@ -156,6 +169,11 @@ struct FireAlarmSystem
     void soundAlarm(std::string announcement);
     void alertFireDepartment(int phoneLine);
 };
+
+FireAlarmSystem::FireAlarmSystem()
+{
+    std::cout << "FireAlarmSystem being constructed!" << std::endl;
+}
 
 bool FireAlarmSystem::detectFire()
 {
@@ -181,6 +199,7 @@ void FireAlarmSystem::alertFireDepartment(int phoneLine)
 
 struct Keyboard
 {
+	Keyboard();
     int numberOfKeys = 88;
     int volume = 100;
     std::string mode = "Acoustic";
@@ -188,6 +207,7 @@ struct Keyboard
     bool pedal = false;
     struct Key
     {
+		Key();
         char name;
         bool isPressed;
         float frequency;
@@ -203,6 +223,16 @@ struct Keyboard
 
     Key key_C;
 };
+
+Keyboard::Keyboard()
+{
+    std::cout << "Keyboard being constructed!" << std::endl;
+}
+
+Keyboard::Key::Key()
+{
+    std::cout << "Key being constructed!" << std::endl;
+}
 
 void Keyboard::Key::playKey(int time)
 {
@@ -252,6 +282,7 @@ void Keyboard::displayMode()
 
 struct Arms
 {
+	Arms();
     int numberOfFingers = 5;
     char side = 'l';
     float strength = 10.0f;
@@ -262,6 +293,11 @@ struct Arms
     void moveObject(float position);
     void punch(float newPosition);
 };
+
+Arms::Arms()
+{
+    std::cout << "Arms being constructed!" << std::endl;
+}
 
 bool Arms::grabObject(bool objectPresent, float objectWeight)
 {
@@ -290,6 +326,7 @@ void Arms::punch(float newPosition)
 
 struct Legs
 {
+	Legs();
     int numberOfToes = 5;
     char side = 'l';
     float strength = 10;
@@ -300,6 +337,11 @@ struct Legs
     void juggleABall();
     float jump(float strengthUsed);
 };
+
+Legs::Legs()
+{
+    std::cout << "Legs being constructed!" << std::endl;
+}
 
 void Legs::kick(float newPosition)
 {
@@ -329,6 +371,7 @@ float Legs::jump(float strengthUsed)
 
 struct Skin
 {
+	Skin();
     std::string color = "Brown";
     float thickness = 1.0f;
     double wrinkles = 10.0;
@@ -338,6 +381,11 @@ struct Skin
     void burn();
     float stretch(float amount);
 };
+
+Skin::Skin()
+{
+    std::cout << "Skin being constructed!" << std::endl;
+}
 
 void Skin::tear()
 {
@@ -366,6 +414,7 @@ float Skin::stretch(float amount)
 
 struct Health
 {
+	Health();
     char bloodType = 'A';
     float weight = 100.0f;
     float height = 180.0f;
@@ -375,6 +424,11 @@ struct Health
     float gainWeight(float weightMultiplier);
     float increaseHeight(float heightMultiplier);
 };
+
+Health::Health()
+{
+    std::cout << "Health being constructed!" << std::endl;
+}
 
 void Health::changeCondition(std::string newCondition)
 {
@@ -404,6 +458,7 @@ float Health::increaseHeight(float heightMultiplier)
 
 struct Personality
 {
+	Personality();
     float iq = 200.0f;
     char gender = 'F';
     std::string personalityType = "INFJ";
@@ -411,6 +466,7 @@ struct Personality
     bool isIntrovert = true;
     struct Mood
     {
+		Mood();
         int happinessRating;
         bool stressed;
         int energyLevel;
@@ -426,6 +482,16 @@ struct Personality
 
     Mood mood;
 };
+
+Personality::Personality()
+{
+    std::cout << "Personality being constructed!" << std::endl;
+}
+
+Personality::Mood::Mood()
+{
+    std::cout << "Mood being constructed!" << std::endl;
+}
 
 float Personality::Mood::probabilityOfChangingMood()
 {
@@ -479,6 +545,7 @@ void Personality::resetMoodParams()
 
 struct Human
 {
+	Human();
     Arms leftArm;
     Legs leftLeg;
     Skin skin;
@@ -488,6 +555,11 @@ struct Human
     int makeFriends(int attempts);
     void getAngry(int angerThreshhold);
 };
+
+Human::Human()
+{
+    std::cout << "Human being constructed!" << std::endl;
+}
 
 void Human::exercise(std::string intensity)
 {
