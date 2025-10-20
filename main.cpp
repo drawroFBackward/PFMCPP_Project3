@@ -40,6 +40,8 @@ int main()
 //call Example::main()
 
 
+// first 5 structs will have member variables initialized in-class, next 5 structs will have member variables initialized in the constructor member initializer list.
+// gonna ignore step 2 as some of my member functions already use initialized member variables (via std::cout statements, caluculation, return, etc).
 
 struct Camera
 {
@@ -197,7 +199,7 @@ Keyboard::Keyboard()
     std::cout << "Keyboard being constructed!" << std::endl;
 }
 
-Keyboard::Key::Key()
+Keyboard::Key::Key() : name('C'), isPressed(false), frequency(261.63f), isBlackKey(false), tuning(0.0f)
 {
     std::cout << "Key being constructed!" << std::endl;
 }
@@ -251,18 +253,18 @@ void Keyboard::displayMode()
 struct Arms
 {
 	Arms();
-    int numberOfFingers = 5;
-    char side = 'l';
-    float strength = 10.0f;
-    float reach = 10.0f;
-    std::string condition = "Good";
+    int numberOfFingers;
+    char side;
+    float strength;
+    float reach;
+    std::string condition;
     float position;
     bool grabObject(bool objectPresent, float objectWeight);
     void moveObject(float position);
     void punch(float newPosition);
 };
 
-Arms::Arms()
+Arms::Arms() : numberOfFingers(5), side('l'), strength(10.0f), reach(10.0f), condition("Good"), position(0.0f)
 {
     std::cout << "Arms being constructed!" << std::endl;
 }
@@ -295,18 +297,18 @@ void Arms::punch(float newPosition)
 struct Legs
 {
 	Legs();
-    int numberOfToes = 5;
-    char side = 'l';
-    float strength = 10;
-    float kneeJointRange = 90.0f;
-	int juggles = 0;
+    int numberOfToes;
+    char side;
+    float strength;
+    float kneeJointRange;
+	int juggles;
     std::string condition = "Injured";
     void kick(float newPosition);
     void juggleABall();
     float jump(float strengthUsed);
 };
 
-Legs::Legs()
+Legs::Legs() : numberOfToes(5), side('l'), strength(10.0f), kneeJointRange(10.0f), juggles(0)
 {
     std::cout << "Legs being constructed!" << std::endl;
 }
@@ -340,17 +342,17 @@ float Legs::jump(float strengthUsed)
 struct Skin
 {
 	Skin();
-    std::string color = "Brown";
-    float thickness = 1.0f;
-    double wrinkles = 10.0;
-    int age = 30;
-    std::string condition = "Burnt";
+    std::string color;
+    float thickness;
+    double wrinkles;
+    int age;
+    std::string condition;
     void tear();
     void burn();
     float stretch(float amount);
 };
 
-Skin::Skin()
+Skin::Skin() : color("Light"), thickness(1.0f), wrinkles(0.0), age(0), condition("Good")
 {
     std::cout << "Skin being constructed!" << std::endl;
 }
@@ -383,17 +385,17 @@ float Skin::stretch(float amount)
 struct Health
 {
 	Health();
-    char bloodType = 'A';
-    float weight = 100.0f;
-    float height = 180.0f;
-    int sleepTimeInHours = 8;
-    std::string condition = "Sick";
+    char bloodType;
+    float weight;
+    float height;
+    int sleepTimeInHours;
+    std::string condition;
     void changeCondition(std::string newCondition);
     float gainWeight(float weightMultiplier);
     float increaseHeight(float heightMultiplier);
 };
 
-Health::Health()
+Health::Health() : bloodType('O'), weight(140.0f), height(170.0f), sleepTimeInHours(7), condition("Unhealthy")
 {
     std::cout << "Health being constructed!" << std::endl;
 }
@@ -456,7 +458,7 @@ Personality::Personality()
     std::cout << "Personality being constructed!" << std::endl;
 }
 
-Personality::Mood::Mood()
+Personality::Mood::Mood() : happinessRating(50), stressed(false), energyLevel(50), age(25), environment("Calm")
 {
     std::cout << "Mood being constructed!" << std::endl;
 }
@@ -524,9 +526,11 @@ struct Human
     void getAngry(int angerThreshhold);
 };
 
-Human::Human()
+Human::Human() : leftArm(), rightArm(), leftLeg(), rightLeg(), skin(), health(), personality_1()
 {
     std::cout << "Human being constructed!" << std::endl;
+	rightArm.side = 'r';
+	rightLeg.side = 'r';
 }
 
 void Human::exercise(std::string intensity)
@@ -599,7 +603,7 @@ int main()
 	coffeeMaker1.makeCoffee(50, 5, 5);
     coffeeMaker1.receiveCoffeeRequest(50, 5, 5);
 	coffeeMaker1.requestForRefill();
-    fireAlarmSystem1.smokeLevel = 60.0;
+	fireAlarmSystem1.smokeLevel = 60.0;
     //detectFire is called in following functions, so not calling it seperately
     fireAlarmSystem1.soundAlarm("Fire detected!");
     fireAlarmSystem1.alertFireDepartment(1234567890);
