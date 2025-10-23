@@ -70,23 +70,18 @@ int main()
 //call Example::main() in main()
 
 
-
-
-
-// first 5 structs will have member variables initialized in-class, next 5 structs will have member variables initialized in the constructor member initializer list.
-// gonna ignore step 2 as some of my member functions already use initialized member variables (via std::cout statements, caluculation, return, etc).
-
 struct Camera
 {
 	Camera();
     std::string lens = "Canon";
     std::string film = "Polaroid";
     float zoomCapacity = 10.0f;
+	float zoomLevel = 0.0f;
     float cameraSize = 100.0f;
     bool captureButton = false;
 	bool flashEnabled = false;
     float takePicture(float zoom, float shutterSpeed);
-    float takeVideo(float zoom, float shutterSpeed, float videoLength);
+	float takeVideo(float zoom, float shutterSpeed, int videoLength);// gonna modify this one to have the for loop
     void flash();
 };
 
@@ -104,13 +99,18 @@ float Camera::takePicture(float zoom, float shutterSpeed)
     return 0.0;
 }
 
-float Camera::takeVideo(float zoom, float shutterSpeed, float videoLength)
+float Camera::takeVideo(float zoom, float shutterSpeed, int videoLength)
 {
-    if (captureButton && film == "Polaroid" && lens == "Canon")
+	float video = 0.0f;
+    for (int i = 0; i < videoLength; ++i) 
     {
-		return videoLength * zoom * shutterSpeed;
-    }
-	return 0.0;
+		video += takePicture(zoom, shutterSpeed);
+        if (video >= 100.0f) 
+        {
+            return video;
+		}
+	}
+	return video;
 }
 
 void Camera::flash()
@@ -130,6 +130,7 @@ struct CoffeeMaker
     void makeCoffee(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY);
     void receiveCoffeeRequest(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY);
     void requestForRefill();
+    void makeDefaultCoffee();
 };
 
 CoffeeMaker::CoffeeMaker()
@@ -158,6 +159,23 @@ void CoffeeMaker::receiveCoffeeRequest(int amountOfWater, int amountOfCoffeeBean
 void CoffeeMaker::requestForRefill()
 {
 	std::cout << "Refill ingredients." << std::endl;
+}
+
+void CoffeeMaker::makeDefaultCoffee()
+{
+    for (int i = 0; i < timer; ++i)
+    {
+        coffeeAmount += 3;
+        --water;
+        --coffeeBeanY;
+        --coffeeBeanX;
+        if (water || coffeeBeanX || coffeeBeanY == 0)
+        {
+            std::cout << "out of ingredients" << std::endl;
+            requestForRefill();
+            return;
+        }
+    }
 }
 
 struct FireAlarmSystem
@@ -631,7 +649,7 @@ int main()
     Human human1;
     // Calling member functions for each instance
 	std::cout << camera1.takePicture(5.0f, 0.5f) << std::endl;
-    std::cout << camera1.takeVideo(5.0f, 0.5f, 10.0f) << std::endl;
+    std::cout << camera1.takeVideo(5.0f, 0.5f, 10) << std::endl;
     camera1.flash();
 	coffeeMaker1.makeCoffee(50, 5, 5);
     coffeeMaker1.receiveCoffeeRequest(50, 5, 5);
