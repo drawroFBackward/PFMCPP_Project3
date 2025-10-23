@@ -331,7 +331,7 @@ void Keyboard::displayMode()
 void Keyboard::playMelody()
 {
     std::string melody = "CDEFGABC";
-    for (int i = 0; i < 8; ++i)
+    for (std::string::size_type i = 0; i < melody.size(); ++i)
     {
         std::cout << "Playing note: " << melody[i] << std::endl;
     }
