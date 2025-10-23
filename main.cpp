@@ -102,7 +102,7 @@ float Camera::takePicture(float zoom, float shutterSpeed)
 float Camera::takeVideo(float zoom, float shutterSpeed, int videoLength)
 {
 	float video = 0.0f;
-	for (int i = 0; i < videoLength; i++) //gonna start at 0 so that I get (videoLength) number of frames
+	for (int i = 0; i < videoLength; i++) //using post to get (videoLength) number of frames. Feel like this is a case where post-increment is better?
     {
 		video += takePicture(zoom, shutterSpeed);
         std::cout << "frame " << i << std::endl;
@@ -168,7 +168,7 @@ void CoffeeMaker::makeDefaultCoffee()
     for (int i = 0; i < timer; i++)
     {
         std::cout << "Making coffee" << std::endl;
-        std::cout << "time left till coffee is ready = " << timer - i << std::endl;//this is why i'm using post increment here
+		std::cout << "time left till coffee is ready = " << timer - i << std::endl;//again, feel like this is a case where post-increment would be better...
         coffeeAmount += 3;
         --water;
         --coffeeBeanY;
@@ -308,7 +308,7 @@ void Keyboard::Key::tuneKey(float newTuning)
 
 void Keyboard::Key::playTremolo()
 {
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 5; ++i)
     {
         playKey(1);
         stopKey();
@@ -483,7 +483,7 @@ struct Skin
     void tear();
     void burn();
     float stretch(float amount);
-
+	float calcDeterioration();
 };
 
 Skin::Skin() : color("Light"), thickness(1.0f), wrinkles(0.0), age(0), condition("Good")
@@ -516,6 +516,18 @@ float Skin::stretch(float amount)
     return thickness;
 }
 
+float Skin::calcDeterioration()
+{
+    float deterioration = 0.0f;
+    for (int i = age; i > 0; --i)
+    {
+        deterioration += 0.1f;
+        // std::cout << "Calculating deterioration... current value: " << deterioration << " at age: " << i << std::endl;
+    }
+	std::cout << "Total skin deterioration at age " << age << ": " << deterioration << std::endl; //feel like printing in the loop would clutter the output too much
+    return deterioration;
+}
+
 struct Health
 {
 	Health();
@@ -527,6 +539,7 @@ struct Health
     void changeCondition(std::string newCondition);
     float gainWeight(float weightMultiplier);
     float increaseHeight(float heightMultiplier);
+	void fattenUp(int days);
 };
 
 Health::Health() : bloodType('O'), weight(140.0f), height(170.0f), sleepTimeInHours(7), condition("Unhealthy")
@@ -546,7 +559,7 @@ float Health::gainWeight(float weightMultiplier)
 {
     if (condition == "Healthy" && sleepTimeInHours < 6)
     {
-        weight = weight * weightMultiplier;
+        weight *= weightMultiplier;
     }
     return weight;
 }
@@ -558,6 +571,20 @@ float Health::increaseHeight(float heightMultiplier)
         height = height * heightMultiplier;
     }
     return height;
+}
+
+void Health::fattenUp(int days)
+{
+    for (int i = 0; i < days; ++i)
+    {
+        gainWeight(0.1);
+        std::cout << "Day " << i << ": Current weight = " << weight << " lbs" << std::endl;
+        if (weight >= 200.0f)
+        {
+            std::cout << "Reached weight threshold of 200 lbs on day " << i << std::endl;
+            return;
+		}
+    }
 }
 
 struct Personality
@@ -745,7 +772,9 @@ int main()
 
 	rightLeg.run(10);
 
+	skin1.calcDeterioration();
 
+	health1.fattenUp(10);
 	/*
 		and here
 		*/
