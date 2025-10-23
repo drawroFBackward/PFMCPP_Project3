@@ -647,43 +647,6 @@ int main()
 	Personality::Mood mood1;
 
     Human human1;
-    // Calling member functions for each instance
-	std::cout << camera1.takePicture(5.0f, 0.5f) << std::endl;
-    std::cout << camera1.takeVideo(5.0f, 0.5f, 10) << std::endl;
-    camera1.flash();
-	coffeeMaker1.makeCoffee(50, 5, 5);
-    coffeeMaker1.receiveCoffeeRequest(50, 5, 5);
-	coffeeMaker1.requestForRefill();
-	fireAlarmSystem1.smokeLevel = 60.0;
-    //detectFire is called in following functions, so not calling it seperately
-    fireAlarmSystem1.soundAlarm("Fire detected!");
-    fireAlarmSystem1.alertFireDepartment(1234567890);
-    keyboard1.key_1.tuneKey(5.0f);
-    keyboard1.playSound(keyC); //calls other key functions
-    keyboard1.changeMode("Electric");
-    keyboard1.displayMode();
-    leftArm.grabObject(true, 5.0f);
-    leftArm.moveObject(10.0f);
-    leftArm.punch(5.0f);
-    std::cout << "Left arm position: " << leftArm.position << std::endl;
-    rightLeg.juggleABall();
-    rightLeg.kick(5.0f);
-    std::cout << "Jump height: " << rightLeg.jump(8.0f) << std::endl;
-    skin1.burn();
-    skin1.tear();
-    std::cout << "Skin stretched by: " << skin1.stretch(5.0f) << "mm" << std::endl;
-    health1.changeCondition("Healthy");
-    std::cout << "New weight: " << health1.gainWeight(1.1f) << std::endl;
-	std::cout << "New height: " << health1.increaseHeight(1.05f) << std::endl;
-    std::cout << "Mood change probability: " << personality1.mood.probabilityOfChangingMood() << "%" << std::endl;
-	std::cout << "Time to change mood: " << personality1.mood.timeToChangeMood() << " minutes" << std::endl;
-	personality1.mood.improveMood();
-	personality1.resetMoodParams();
-	personality1.goToWork("Monday");
-	std::cout << (personality1.learnSkill() ? "Can learn new skill" : "Cannot learn new skill") << std::endl;
-    human1.exercise("High");
-	std::cout << "Friends made: " << human1.makeFriends(3) << std::endl;
-	human1.getAngry(5);
 	/*
 		and here
 		*/
