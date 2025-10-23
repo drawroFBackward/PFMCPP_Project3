@@ -606,11 +606,12 @@ struct Personality
         float probabilityOfChangingMood();
         int timeToChangeMood();
 		void improveMood();
+		void degradeMood();
     };
     bool goToWork(std::string dayOfTheWeek);
     bool learnSkill();
     void resetMoodParams();
-
+	void degradePersonality();
     Mood mood;
 };
 
@@ -653,6 +654,22 @@ void Personality::Mood::improveMood()
     environment =  "Calm";
 }
 
+void Personality::Mood::degradeMood()
+{
+    for (int i = 0; i < 5; ++i)
+    {
+        happinessRating -= 5;
+        energyLevel -= 5;
+        std::cout << "Degrading mood... Current happiness: " << happinessRating << ", energy level: " << energyLevel << " after " << i << " iterations." << std::endl;
+        if (happinessRating <= 0 || energyLevel <= 0)
+        {
+            stressed = true;
+            std::cout << "Mood has degraded to stressed state after " << i << " iterations." << std::endl;
+            return;
+        }
+	}
+}//ill be honest, I just co-piloted this one
+
 bool Personality::goToWork(std::string dayOfTheWeek)
 {
     return !(dayOfTheWeek == "Saturday" || dayOfTheWeek == "Sunday");
@@ -674,6 +691,21 @@ void Personality::resetMoodParams()
     }
 }
 
+void Personality::degradePersonality()
+{
+    for (int i = 0; i < 10; ++i)
+    {
+        iq -= 5.0f;
+        interactionsPerDay -= 1;
+        std::cout << "Degrading personality... Current IQ: " << iq << ", interactions per day: " << interactionsPerDay << " after " << i << " iterations." << std::endl;
+        if (iq <= 100.0f || interactionsPerDay <= 0)
+        {
+            std::cout << "Personality has degraded significantly after " << i << " iterations." << std::endl;
+            return;
+        }
+    }
+}//co-piloted again
+
 struct Human
 {
 	Human();
@@ -685,6 +717,7 @@ struct Human
     void exercise(std::string intensity);
     int makeFriends(int attempts);
     void getAngry(int angerThreshhold);
+	void kickBox();
 };
 
 Human::Human() : leftArm(), rightArm(), leftLeg(), rightLeg(), skin(), health(), personality_1()
@@ -719,6 +752,16 @@ void Human::getAngry(int angerThreshhold)
         personality_1.mood.stressed = true;
     }
 }
+
+void Human::kickBox()
+{
+    for (int i = 0; i < 5; ++i)
+    {
+        rightArm.punch(3.0f);
+        leftLeg.kick(3.0f);
+        std::cout << "Kickboxing... Right arm position: " << rightArm.position << ", Left leg knee joint range: " << leftLeg.kneeJointRange << " after " << i << " iterations." << std::endl;
+    }
+}//co-piloted again
 
 
 int main()
@@ -775,6 +818,12 @@ int main()
 	skin1.calcDeterioration();
 
 	health1.fattenUp(10);
+
+	personality1.mood.degradeMood();
+
+	personality1.degradePersonality();
+
+	human1.kickBox();
 	/*
 		and here
 		*/
