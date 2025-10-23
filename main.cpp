@@ -263,6 +263,7 @@ struct Keyboard
         void playKey(int time);
         void stopKey();
         void tuneKey(float newTuning);
+		void playTremolo();
     };
     void playSound(Key key);
     void changeMode(std::string newMode);
@@ -304,6 +305,15 @@ void Keyboard::Key::tuneKey(float newTuning)
 {
 	tuning += newTuning;
 }
+
+void Keyboard::Key::playTremolo()
+{
+    for (int i = 0; i < 5; i++)
+    {
+        playKey(1);
+        stopKey();
+    }
+}//had no clue this was what it was called XD
 
 void Keyboard::playSound(Key key)
 {
@@ -349,6 +359,7 @@ struct Arms
     bool grabObject(bool objectPresent, float objectWeight);
     void moveObject(float position);
     void punch(float newPosition);
+	float moveObjectByPunch(int numberOfPunches);
 };
 
 Arms::Arms() : numberOfFingers(5), side('l'), strength(10.0f), reach(10.0f), condition("Good"), position(0.0f)
@@ -381,6 +392,20 @@ void Arms::punch(float newPosition)
     }
 }
 
+float Arms::moveObjectByPunch(int numberOfPunches)
+{
+    float totalMovement = 0.0f;
+    for (int i = 0; i < numberOfPunches; ++i)
+    {
+		float oldPosition = position;
+        punch(2.0f);
+        totalMovement += (position - oldPosition);
+	    std::cout << "Punch " << i << " moved the object by " << (position - oldPosition) << std::endl;
+    }
+	std::cout << "Total movement after " << numberOfPunches << " punches: " << totalMovement << std::endl;
+    return totalMovement;
+}
+
 struct Legs
 {
 	Legs();
@@ -389,10 +414,11 @@ struct Legs
     float strength;
     float kneeJointRange;
 	int juggles;
-    std::string condition = "Injured";
+    std::string condition = "Good";
     void kick(float newPosition);
     void juggleABall();
     float jump(float strengthUsed);
+	float run(int time);
 };
 
 Legs::Legs() : numberOfToes(5), side('l'), strength(10.0f), kneeJointRange(10.0f), juggles(0)
@@ -426,6 +452,26 @@ float Legs::jump(float strengthUsed)
     return 0.0f;
 }
 
+float Legs::run(int time)
+{
+    float distance = 0.0f;
+    for (int i = 0; i < time; ++i)
+    {
+        if (condition == "Good" && strength > 5.0f)
+        {
+            distance += strength * 0.5f;
+            std::cout << "Running... distance covered: " << distance << " after " << i << " seconds." << std::endl;
+			strength -= 0.5f; // fatigue
+        }
+        else
+        {
+			(strength < 5.0f) ? std::cout << "Cannot run due to fatigue" << std::endl : std::cout << "Cannot run due to bad condition" << std::endl;
+            break;
+        }
+    }
+    return distance;
+}
+
 struct Skin
 {
 	Skin();
@@ -437,6 +483,7 @@ struct Skin
     void tear();
     void burn();
     float stretch(float amount);
+
 };
 
 Skin::Skin() : color("Light"), thickness(1.0f), wrinkles(0.0), age(0), condition("Good")
@@ -691,6 +738,14 @@ int main()
 	fireAlarmSystem1.putOutFire();
 
 	keyboard1.playMelody();
+
+	keyC.playTremolo();
+
+	leftArm.moveObjectByPunch(5);
+
+	rightLeg.run(10);
+
+
 	/*
 		and here
 		*/
