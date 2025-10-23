@@ -105,8 +105,10 @@ float Camera::takeVideo(float zoom, float shutterSpeed, int videoLength)
     for (int i = 0; i < videoLength; ++i) 
     {
 		video += takePicture(zoom, shutterSpeed);
+        std::cout << "frame " << i << std::endl;
         if (video >= 100.0f) 
         {
+            std::cout << "out of memory at frame" << i << std::endl;
             return video;
 		}
 	}
@@ -163,16 +165,19 @@ void CoffeeMaker::requestForRefill()
 
 void CoffeeMaker::makeDefaultCoffee()
 {
-    for (int i = 0; i < timer; ++i)
+    for (int i = 0; i < timer-1; i++)
     {
+        std::cout << "Making coffee" << std::endl;
+        std::cout << "time left till coffee is ready = " << timer - i << std::endl;//this is why i'm using post increment here
         coffeeAmount += 3;
         --water;
         --coffeeBeanY;
         --coffeeBeanX;
+        std::cout << "current coffee amount = " << coffeeAmount << std::endl;
+
         if (water || coffeeBeanX || coffeeBeanY == 0)
         {
             std::cout << "out of ingredients" << std::endl;
-            requestForRefill();
             return;
         }
     }
