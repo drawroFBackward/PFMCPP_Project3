@@ -102,7 +102,7 @@ float Camera::takePicture(float zoom, float shutterSpeed)
 float Camera::takeVideo(float zoom, float shutterSpeed, int videoLength)
 {
 	float video = 0.0f;
-    for (int i = 0; i < videoLength; ++i) 
+	for (int i = 0; i < videoLength; i++) //gonna start at 0 so that I get (videoLength) number of frames
     {
 		video += takePicture(zoom, shutterSpeed);
         std::cout << "frame " << i << std::endl;
@@ -165,7 +165,7 @@ void CoffeeMaker::requestForRefill()
 
 void CoffeeMaker::makeDefaultCoffee()
 {
-    for (int i = 0; i < timer-1; i++)
+    for (int i = 0; i < timer; i++)
     {
         std::cout << "Making coffee" << std::endl;
         std::cout << "time left till coffee is ready = " << timer - i << std::endl;//this is why i'm using post increment here
@@ -175,11 +175,16 @@ void CoffeeMaker::makeDefaultCoffee()
         --coffeeBeanX;
         std::cout << "current coffee amount = " << coffeeAmount << std::endl;
 
-        if (water || coffeeBeanX || coffeeBeanY == 0)
+        if (water == 0 || coffeeBeanX == 0 || coffeeBeanY == 0)
         {
+            if (i == timer)
+            {
+                std::cout << "finished making coffee" << std::endl;
+			}
             std::cout << "out of ingredients" << std::endl;
             return;
         }
+		std::cout << "finished making coffee" << std::endl;
     }
 }
 
@@ -190,13 +195,14 @@ struct FireAlarmSystem
     std::string speaker = "There's a fire";
     int serialNumber = 1;
     std::string camera = "Canon";
-    double smokeLevel = 0.0;
+    double smokeLevel;
     bool detectFire();
     void soundAlarm(std::string announcement);
     void alertFireDepartment(int phoneLine);
+	void putOutFire();
 };
 
-FireAlarmSystem::FireAlarmSystem()
+FireAlarmSystem::FireAlarmSystem() : smokeLevel(20.0)
 {
     std::cout << "FireAlarmSystem being constructed!" << std::endl;
 }
@@ -221,6 +227,21 @@ void FireAlarmSystem::alertFireDepartment(int phoneLine)
         std::cout << "Alerting fire department." << std::endl;
 		// pretend to send camera footage and call fire department eg. callFireDept(phoneLine); sendFootage(camera, phoneLine);
     }
+}
+
+void FireAlarmSystem::putOutFire()
+{
+    while (detectFire())
+    {
+        smokeLevel -= 10.0;
+        std::cout << "Putting out fire, current smoke level: " << smokeLevel << std::endl;
+        if (smokeLevel <= 0.0)
+        {
+            std::cout << "Fire put out!" << std::endl;
+            smokeLevel = 0.0;
+            return;
+        }
+	}
 }
 
 struct Keyboard
@@ -652,6 +673,12 @@ int main()
 	Personality::Mood mood1;
 
     Human human1;
+
+	camera1.takeVideo(5.0f, 0.5f, 15);
+
+	coffeeMaker1.makeDefaultCoffee();
+
+	fireAlarmSystem1.putOutFire();
 	/*
 		and here
 		*/
