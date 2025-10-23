@@ -577,7 +577,7 @@ void Health::fattenUp(int days)
 {
     for (int i = 0; i < days; ++i)
     {
-        gainWeight(0.1);
+        gainWeight(0.1f);
         std::cout << "Day " << i << ": Current weight = " << weight << " lbs" << std::endl;
         if (weight >= 200.0f)
         {
