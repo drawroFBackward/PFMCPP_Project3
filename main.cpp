@@ -267,6 +267,7 @@ struct Keyboard
     void playSound(Key key);
     void changeMode(std::string newMode);
     void displayMode();
+	void playMelody();
 
     Key key_1;
 };
@@ -325,6 +326,15 @@ void Keyboard::changeMode(std::string newMode)
 void Keyboard::displayMode()
 {
     std::cout << "Current mode: " << mode << " displayed on LCD screen size: " << lcdScreen << " inches" << std::endl;
+}
+
+void Keyboard::playMelody()
+{
+    std::string melody = "CDEFGABC";
+    for (int i = 0; i < 8; ++i)
+    {
+        std::cout << "Playing note: " << melody[i] << std::endl;
+    }
 }
 
 struct Arms
@@ -679,6 +689,8 @@ int main()
 	coffeeMaker1.makeDefaultCoffee();
 
 	fireAlarmSystem1.putOutFire();
+
+	keyboard1.playMelody();
 	/*
 		and here
 		*/
