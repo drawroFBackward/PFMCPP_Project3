@@ -102,7 +102,7 @@ float Camera::takePicture(float zoom, float shutterSpeed)
 float Camera::takeVideo(float zoom, float shutterSpeed, int videoLength)
 {
 	float video = 0.0f;
-	for (int i = 0; i < videoLength; i++) //using post to get (videoLength) number of frames. Feel like this is a case where post-increment is better?
+	for (int i = 0; i < videoLength; ++i) //using post to get (videoLength) number of frames. Feel like this is a case where post-increment is better?
     {
 		video += takePicture(zoom, shutterSpeed);
         std::cout << "frame " << i << std::endl;
@@ -165,10 +165,10 @@ void CoffeeMaker::requestForRefill()
 
 void CoffeeMaker::makeDefaultCoffee()
 {
-    for (int i = 0; i < timer; i++)
+    for (int i = 0; i < timer; ++i)
     {
         std::cout << "Making coffee" << std::endl;
-		std::cout << "time left till coffee is ready = " << timer - i << std::endl;//again, feel like this is a case where post-increment would be better...
+		std::cout << "time left till coffee is ready = " << timer - i << std::endl;
         coffeeAmount += 3;
         --water;
         --coffeeBeanY;
