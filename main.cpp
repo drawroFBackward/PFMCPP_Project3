@@ -70,23 +70,18 @@ int main()
 //call Example::main() in main()
 
 
-
-
-
-// first 5 structs will have member variables initialized in-class, next 5 structs will have member variables initialized in the constructor member initializer list.
-// gonna ignore step 2 as some of my member functions already use initialized member variables (via std::cout statements, caluculation, return, etc).
-
 struct Camera
 {
 	Camera();
     std::string lens = "Canon";
     std::string film = "Polaroid";
     float zoomCapacity = 10.0f;
+	float zoomLevel = 0.0f;
     float cameraSize = 100.0f;
     bool captureButton = false;
 	bool flashEnabled = false;
     float takePicture(float zoom, float shutterSpeed);
-    float takeVideo(float zoom, float shutterSpeed, float videoLength);
+	float takeVideo(float zoom, float shutterSpeed, int videoLength);// gonna modify this one to have the for loop
     void flash();
 };
 
@@ -104,13 +99,20 @@ float Camera::takePicture(float zoom, float shutterSpeed)
     return 0.0;
 }
 
-float Camera::takeVideo(float zoom, float shutterSpeed, float videoLength)
+float Camera::takeVideo(float zoom, float shutterSpeed, int videoLength)
 {
-    if (captureButton && film == "Polaroid" && lens == "Canon")
+	float video = 0.0f;
+	for (int i = 0; i < videoLength; ++i) //using post to get (videoLength) number of frames. Feel like this is a case where post-increment is better?
     {
-		return videoLength * zoom * shutterSpeed;
-    }
-	return 0.0;
+		video += takePicture(zoom, shutterSpeed);
+        std::cout << "frame " << i << std::endl;
+        if (video >= 100.0f) 
+        {
+            std::cout << "out of memory at frame" << i << std::endl;
+            return video;
+		}
+	}
+	return video;
 }
 
 void Camera::flash()
@@ -130,6 +132,7 @@ struct CoffeeMaker
     void makeCoffee(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY);
     void receiveCoffeeRequest(int amountOfWater, int amountOfCoffeeBeanX, int amountOfCoffeeBeanY);
     void requestForRefill();
+    void makeDefaultCoffee();
 };
 
 CoffeeMaker::CoffeeMaker()
@@ -160,6 +163,31 @@ void CoffeeMaker::requestForRefill()
 	std::cout << "Refill ingredients." << std::endl;
 }
 
+void CoffeeMaker::makeDefaultCoffee()
+{
+    for (int i = 0; i < timer; ++i)
+    {
+        std::cout << "Making coffee" << std::endl;
+		std::cout << "time left till coffee is ready = " << timer - i << std::endl;
+        coffeeAmount += 3;
+        --water;
+        --coffeeBeanY;
+        --coffeeBeanX;
+        std::cout << "current coffee amount = " << coffeeAmount << std::endl;
+
+        if (water == 0 || coffeeBeanX == 0 || coffeeBeanY == 0)
+        {
+            if (i == timer)
+            {
+                std::cout << "finished making coffee" << std::endl;
+			}
+            std::cout << "out of ingredients" << std::endl;
+            return;
+        }
+		std::cout << "finished making coffee" << std::endl;
+    }
+}
+
 struct FireAlarmSystem
 {
 	FireAlarmSystem();
@@ -167,13 +195,14 @@ struct FireAlarmSystem
     std::string speaker = "There's a fire";
     int serialNumber = 1;
     std::string camera = "Canon";
-    double smokeLevel = 0.0;
+    double smokeLevel;
     bool detectFire();
     void soundAlarm(std::string announcement);
     void alertFireDepartment(int phoneLine);
+	void putOutFire();
 };
 
-FireAlarmSystem::FireAlarmSystem()
+FireAlarmSystem::FireAlarmSystem() : smokeLevel(20.0)
 {
     std::cout << "FireAlarmSystem being constructed!" << std::endl;
 }
@@ -200,6 +229,21 @@ void FireAlarmSystem::alertFireDepartment(int phoneLine)
     }
 }
 
+void FireAlarmSystem::putOutFire()
+{
+    while (detectFire())
+    {
+        smokeLevel -= 10.0;
+        std::cout << "Putting out fire, current smoke level: " << smokeLevel << std::endl;
+        if (smokeLevel <= 0.0)
+        {
+            std::cout << "Fire put out!" << std::endl;
+            smokeLevel = 0.0;
+            return;
+        }
+	}
+}
+
 struct Keyboard
 {
 	Keyboard();
@@ -219,10 +263,12 @@ struct Keyboard
         void playKey(int time);
         void stopKey();
         void tuneKey(float newTuning);
+		void playTremolo();
     };
     void playSound(Key key);
     void changeMode(std::string newMode);
     void displayMode();
+	void playMelody();
 
     Key key_1;
 };
@@ -260,6 +306,15 @@ void Keyboard::Key::tuneKey(float newTuning)
 	tuning += newTuning;
 }
 
+void Keyboard::Key::playTremolo()
+{
+    for (int i = 0; i < 5; ++i)
+    {
+        playKey(1);
+        stopKey();
+    }
+}//had no clue this was what it was called XD
+
 void Keyboard::playSound(Key key)
 {
     if (mode == "Acoustic" && pedal)
@@ -283,6 +338,15 @@ void Keyboard::displayMode()
     std::cout << "Current mode: " << mode << " displayed on LCD screen size: " << lcdScreen << " inches" << std::endl;
 }
 
+void Keyboard::playMelody()
+{
+    std::string melody = "CDEFGABC";
+    for (std::string::size_type i = 0; i < melody.size(); ++i)
+    {
+        std::cout << "Playing note: " << melody[i] << std::endl;
+    }
+}
+
 struct Arms
 {
 	Arms();
@@ -295,6 +359,7 @@ struct Arms
     bool grabObject(bool objectPresent, float objectWeight);
     void moveObject(float position);
     void punch(float newPosition);
+	float moveObjectByPunch(int numberOfPunches);
 };
 
 Arms::Arms() : numberOfFingers(5), side('l'), strength(10.0f), reach(10.0f), condition("Good"), position(0.0f)
@@ -327,6 +392,20 @@ void Arms::punch(float newPosition)
     }
 }
 
+float Arms::moveObjectByPunch(int numberOfPunches)
+{
+    float totalMovement = 0.0f;
+    for (int i = 0; i < numberOfPunches; ++i)
+    {
+		float oldPosition = position;
+        punch(2.0f);
+        totalMovement += (position - oldPosition);
+	    std::cout << "Punch " << i << " moved the object by " << (position - oldPosition) << std::endl;
+    }
+	std::cout << "Total movement after " << numberOfPunches << " punches: " << totalMovement << std::endl;
+    return totalMovement;
+}
+
 struct Legs
 {
 	Legs();
@@ -335,10 +414,11 @@ struct Legs
     float strength;
     float kneeJointRange;
 	int juggles;
-    std::string condition = "Injured";
+    std::string condition = "Good";
     void kick(float newPosition);
     void juggleABall();
     float jump(float strengthUsed);
+	float run(int time);
 };
 
 Legs::Legs() : numberOfToes(5), side('l'), strength(10.0f), kneeJointRange(10.0f), juggles(0)
@@ -372,6 +452,26 @@ float Legs::jump(float strengthUsed)
     return 0.0f;
 }
 
+float Legs::run(int time)
+{
+    float distance = 0.0f;
+    for (int i = 0; i < time; ++i)
+    {
+        if (condition == "Good" && strength > 5.0f)
+        {
+            distance += strength * 0.5f;
+            std::cout << "Running... distance covered: " << distance << " after " << i << " seconds." << std::endl;
+			strength -= 0.5f; // fatigue
+        }
+        else
+        {
+			(strength < 5.0f) ? std::cout << "Cannot run due to fatigue" << std::endl : std::cout << "Cannot run due to bad condition" << std::endl;
+            break;
+        }
+    }
+    return distance;
+}
+
 struct Skin
 {
 	Skin();
@@ -383,6 +483,7 @@ struct Skin
     void tear();
     void burn();
     float stretch(float amount);
+	float calcDeterioration();
 };
 
 Skin::Skin() : color("Light"), thickness(1.0f), wrinkles(0.0), age(0), condition("Good")
@@ -415,6 +516,18 @@ float Skin::stretch(float amount)
     return thickness;
 }
 
+float Skin::calcDeterioration()
+{
+    float deterioration = 0.0f;
+    for (int i = age; i > 0; --i)
+    {
+        deterioration += 0.1f;
+        // std::cout << "Calculating deterioration... current value: " << deterioration << " at age: " << i << std::endl;
+    }
+	std::cout << "Total skin deterioration at age " << age << ": " << deterioration << std::endl; //feel like printing in the loop would clutter the output too much
+    return deterioration;
+}
+
 struct Health
 {
 	Health();
@@ -426,6 +539,7 @@ struct Health
     void changeCondition(std::string newCondition);
     float gainWeight(float weightMultiplier);
     float increaseHeight(float heightMultiplier);
+	void fattenUp(int days);
 };
 
 Health::Health() : bloodType('O'), weight(140.0f), height(170.0f), sleepTimeInHours(7), condition("Unhealthy")
@@ -445,7 +559,7 @@ float Health::gainWeight(float weightMultiplier)
 {
     if (condition == "Healthy" && sleepTimeInHours < 6)
     {
-        weight = weight * weightMultiplier;
+        weight *= weightMultiplier;
     }
     return weight;
 }
@@ -457,6 +571,20 @@ float Health::increaseHeight(float heightMultiplier)
         height = height * heightMultiplier;
     }
     return height;
+}
+
+void Health::fattenUp(int days)
+{
+    for (int i = 0; i < days; ++i)
+    {
+        gainWeight(0.1f);
+        std::cout << "Day " << i << ": Current weight = " << weight << " lbs" << std::endl;
+        if (weight >= 200.0f)
+        {
+            std::cout << "Reached weight threshold of 200 lbs on day " << i << std::endl;
+            return;
+		}
+    }
 }
 
 struct Personality
@@ -478,11 +606,12 @@ struct Personality
         float probabilityOfChangingMood();
         int timeToChangeMood();
 		void improveMood();
+		void degradeMood();
     };
     bool goToWork(std::string dayOfTheWeek);
     bool learnSkill();
     void resetMoodParams();
-
+	void degradePersonality();
     Mood mood;
 };
 
@@ -525,6 +654,22 @@ void Personality::Mood::improveMood()
     environment =  "Calm";
 }
 
+void Personality::Mood::degradeMood()
+{
+    for (int i = 0; i < 5; ++i)
+    {
+        happinessRating -= 5;
+        energyLevel -= 5;
+        std::cout << "Degrading mood... Current happiness: " << happinessRating << ", energy level: " << energyLevel << " after " << i << " iterations." << std::endl;
+        if (happinessRating <= 0 || energyLevel <= 0)
+        {
+            stressed = true;
+            std::cout << "Mood has degraded to stressed state after " << i << " iterations." << std::endl;
+            return;
+        }
+	}
+}//ill be honest, I just co-piloted this one
+
 bool Personality::goToWork(std::string dayOfTheWeek)
 {
     return !(dayOfTheWeek == "Saturday" || dayOfTheWeek == "Sunday");
@@ -546,6 +691,21 @@ void Personality::resetMoodParams()
     }
 }
 
+void Personality::degradePersonality()
+{
+    for (int i = 0; i < 10; ++i)
+    {
+        iq -= 5.0f;
+        interactionsPerDay -= 1;
+        std::cout << "Degrading personality... Current IQ: " << iq << ", interactions per day: " << interactionsPerDay << " after " << i << " iterations." << std::endl;
+        if (iq <= 100.0f || interactionsPerDay <= 0)
+        {
+            std::cout << "Personality has degraded significantly after " << i << " iterations." << std::endl;
+            return;
+        }
+    }
+}//co-piloted again
+
 struct Human
 {
 	Human();
@@ -557,6 +717,7 @@ struct Human
     void exercise(std::string intensity);
     int makeFriends(int attempts);
     void getAngry(int angerThreshhold);
+	void kickBox();
 };
 
 Human::Human() : leftArm(), rightArm(), leftLeg(), rightLeg(), skin(), health(), personality_1()
@@ -591,6 +752,16 @@ void Human::getAngry(int angerThreshhold)
         personality_1.mood.stressed = true;
     }
 }
+
+void Human::kickBox()
+{
+    for (int i = 0; i < 5; ++i)
+    {
+        rightArm.punch(3.0f);
+        leftLeg.kick(3.0f);
+        std::cout << "Kickboxing... Right arm position: " << rightArm.position << ", Left leg knee joint range: " << leftLeg.kneeJointRange << " after " << i << " iterations." << std::endl;
+    }
+}//co-piloted again
 
 
 int main()
@@ -629,43 +800,30 @@ int main()
 	Personality::Mood mood1;
 
     Human human1;
-    // Calling member functions for each instance
-	std::cout << camera1.takePicture(5.0f, 0.5f) << std::endl;
-    std::cout << camera1.takeVideo(5.0f, 0.5f, 10.0f) << std::endl;
-    camera1.flash();
-	coffeeMaker1.makeCoffee(50, 5, 5);
-    coffeeMaker1.receiveCoffeeRequest(50, 5, 5);
-	coffeeMaker1.requestForRefill();
-	fireAlarmSystem1.smokeLevel = 60.0;
-    //detectFire is called in following functions, so not calling it seperately
-    fireAlarmSystem1.soundAlarm("Fire detected!");
-    fireAlarmSystem1.alertFireDepartment(1234567890);
-    keyboard1.key_1.tuneKey(5.0f);
-    keyboard1.playSound(keyC); //calls other key functions
-    keyboard1.changeMode("Electric");
-    keyboard1.displayMode();
-    leftArm.grabObject(true, 5.0f);
-    leftArm.moveObject(10.0f);
-    leftArm.punch(5.0f);
-    std::cout << "Left arm position: " << leftArm.position << std::endl;
-    rightLeg.juggleABall();
-    rightLeg.kick(5.0f);
-    std::cout << "Jump height: " << rightLeg.jump(8.0f) << std::endl;
-    skin1.burn();
-    skin1.tear();
-    std::cout << "Skin stretched by: " << skin1.stretch(5.0f) << "mm" << std::endl;
-    health1.changeCondition("Healthy");
-    std::cout << "New weight: " << health1.gainWeight(1.1f) << std::endl;
-	std::cout << "New height: " << health1.increaseHeight(1.05f) << std::endl;
-    std::cout << "Mood change probability: " << personality1.mood.probabilityOfChangingMood() << "%" << std::endl;
-	std::cout << "Time to change mood: " << personality1.mood.timeToChangeMood() << " minutes" << std::endl;
-	personality1.mood.improveMood();
-	personality1.resetMoodParams();
-	personality1.goToWork("Monday");
-	std::cout << (personality1.learnSkill() ? "Can learn new skill" : "Cannot learn new skill") << std::endl;
-    human1.exercise("High");
-	std::cout << "Friends made: " << human1.makeFriends(3) << std::endl;
-	human1.getAngry(5);
+
+	camera1.takeVideo(5.0f, 0.5f, 15);
+
+	coffeeMaker1.makeDefaultCoffee();
+
+	fireAlarmSystem1.putOutFire();
+
+	keyboard1.playMelody();
+
+	keyC.playTremolo();
+
+	leftArm.moveObjectByPunch(5);
+
+	rightLeg.run(10);
+
+	skin1.calcDeterioration();
+
+	health1.fattenUp(10);
+
+	personality1.mood.degradeMood();
+
+	personality1.degradePersonality();
+
+	human1.kickBox();
 	/*
 		and here
 		*/
